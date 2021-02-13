@@ -161,8 +161,79 @@ Cette solution est composée :
 - d'une interface visiteur, récupérant dynamiquement du contenu à afficher dans une base de données ; 
 - d'un *back-office* que j'ai développé *from scratch* en PHP/MySQL pour ajouter, afficher, modifier et supprimer (*CRUD*) ;
 
+## Cahier des charges
 
-## Spécifications fonctionnelles du projet
+### Conception graphique 
+
+#### *Benchmark*
+
+#### Charte graphique
+
+##### Palette chromatique
+
+##### Typographies
+
+##### UI KIT
+
+#### Maquettes
+
+### Spécifications fonctionnelles du projet
+
+#### Développement de l'interface du *back-office*
+
+##### La page de connexion
+
+Il s'agît de la page « index.php ». Elle se compose d'un formulaire de connexion permettant de renseigner un nom d'utilisateur et un mot de passe. Le script vérifie si ce nom d'utilisateur et ce mot de passe sont enregistrés dans la base de données, si c'est le cas, on accède à la page « home.php ». Dans le cas contraire, on reste sur cette page, qui propose aussi un lien vers la page « register.php » permettant de soumettre une demande d'inscription.
+
+##### La page d'inscription d'un nouvel utilisateur
+
+Il s'agît de la page « register.php » Elle permet de soumettre une demande d'inscription via un formulaire. Le visiteur doit renseigner un nom d'utilisateur, un email et un mot de passe, qu'il doit re-taper par sécurité dans un second champs de type *password*.
+
+Lorsqu'un utilisateur soumet une inscription, le programme vérifie la correspondance des deux mots de passe saisie puis crypte le mot de passe avant de l'insérer dans la base de données.
+
+##### La page listant les projets
+
+Il s'agît de la page « home.php ». Cette page se connecte à la base de données et affiche le titre de tous les projets contenus dans la table « projects », ainsi que leurs technologies. 
+
+En cliquant sur l'icone représentant une page web, on accède à la page « details.php » pour consultation des informations enregistrées en base de données concernant le projet sélectionné.
+
+Un bouton « ajouter un projet » permet d'accéder à la page « add.php ». 
+
+Depuis cette page, on peut aussi modifier ou supprimer un projet existant et changer sa visibilité, ou encore se déconnecter du *back-office*.
+
+> La requête pour récupérer les informations affichées sur cette page est la même que celle utilisée sur la page listant les projets de l'interface visiteur du portfolio. 
+
+##### La page de création d'un projet
+
+Il s'agît de la page « add.php ». C'est un formulaire permettant de renseigner toutes les informations concernant un nouveau projet : son titre, sa période de réalisation, se technologies, la description du projet, sa visibilité par défaut (masquée ou affichée), son image mise-en-avant, et les liens vers le projet en ligne, les maquettes *desktop* et *mobile* et son github.
+
+##### La page affichant un projet
+
+Il s'agît de la page « details.php ». Elle affiche toutes les informations concernant un projet en fonction de son id. Une icône indique la possibilité de modifier les informations, elle redirige sur la page « edit.php ». Une autre icône permete de naviguer vers la page listant les projets.
+
+##### La page de modification d'un projet
+
+Il s'agît de la page « edit.php ». Elle affiche un formulaire reprenant les informations concernant un projet en fonction de son id.
+
+Elle permet aussi de charger une nouvelle image qui remplace l'image existante.
+
+#### Développement *front-end*
+
+L'objectif de la partie visiteur de mon portfolio de développeur web est de permettre à des personnes s'intéressant à mon profil en vue d'un éventuel recrutement d'en savoir plus sur mes compétences et de découvrir les projets sur lesquels j'ai travaillé. Mon portfolio est donc un site de type *One Page* composé de cinq ancres :
+- Accueil ;
+- Mes compétences ;
+- Mon parcours ;
+- Réalisations ;
+- Contacts ;
+
+##### L'accueil 
+
+La première information qui doit sauter aux yeux du visiteur est que je suis un *designer* et developpeur web. C'est donc l'information centrale de la rubrique Accueil, qui se compose aussi du menu et d'une photo animée afin de se familiariser avec moi. 
+
+Pour mieux comprendre mon identité, j'ai cherché à mettre en avant mes origines, ce qui explique le logo de mon portfolio : une image au format vectoriel représentant Madagascar, mon pays d'origine. J'ai réalisé ce logo avec Adobe Illustrator, j'ai chargé une carte de Madagascar dans un format BITMAP, j'ai utilisé l'outil plume pour faire un tracé des contours puis j'ai utilisé l'outil concepteur de forme pour obtenir la version vectorisée, j'ai ensuite travaillé sur les couleurs.
+
+
+## Spécifications techniques du projet
 
 ### Développement *back-end*
 
@@ -191,49 +262,11 @@ Cette base de données se compose de 2 tables. Les tables « utilisateurs » et 
     - desktop_mockup_link
     - github_link
 
-#### Modélisation de la base de données
+##### Modélisation de la base de données
 
 ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/XzWz6yV/mysql-workbench.jpg)
 
-### Développement de l'interface du *back-office*
 
-#### La page de connexion
-
-Il s'agît de la page « index.php ». Elle se compose d'un formulaire de connexion permettant de renseigner un nom d'utilisateur et un mot de passe. Le script vérifie si ce nom d'utilisateur et ce mot de passe sont enregistrés dans la base de données, si c'est le cas, on accède à la page « home.php ». Dans le cas contraire, on reste sur cette page, qui propose aussi un lien vers la page « register.php » permettant de soumettre une demande d'inscription.
-
-#### La page d'inscription d'un nouvel utilisateur
-
-Il s'agît de la page « register.php » Elle permet de soumettre une demande d'inscription via un formulaire. Le visiteur doit renseigner un nom d'utilisateur, un email et un mot de passe, qu'il doit re-taper par sécurité dans un second champs de type *password*.
-
-Lorsqu'un utilisateur soumet une inscription, le programme vérifie la correspondance des deux mots de passe saisie puis crypte le mot de passe avant de l'insérer dans la base de données.
-
-#### La page listant les projets
-
-Il s'agît de la page « home.php ». Cette page se connecte à la base de données et affiche le titre de tous les projets contenus dans la table « projects », ainsi que leurs technologies. 
-
-En cliquant sur l'icone représentant une page web, on accède à la page « details.php » pour consultation des informations enregistrées en base de données concernant le projet sélectionné.
-
-Un bouton « ajouter un projet » permet d'accéder à la page « add.php ». 
-
-Depuis cette page, on peut aussi modifier ou supprimer un projet existant et changer sa visibilité, ou encore se déconnecter du *back-office*.
-
-> La requête pour récupérer les informations affichées sur cette page est la même que celle utilisée sur la page listant les projets de l'interface visiteur du portfolio. 
-
-#### La page de création d'un projet
-
-Il s'agît de la page « add.php ». C'est un formulaire permettant de renseigner toutes les informations concernant un nouveau projet : son titre, sa période de réalisation, se technologies, la description du projet, sa visibilité par défaut (masquée ou affichée), son image mise-en-avant, et les liens vers le projet en ligne, les maquettes *desktop* et *mobile* et son github.
-
-#### La page affichant un projet
-
-Il s'agît de la page « details.php ». Elle affiche toutes les informations concernant un projet en fonction de son id. Une icône indique la possibilité de modifier les informations, elle redirige sur la page « edit.php ». Une autre icône permete de naviguer vers la page listant les projets.
-
-#### La page de modification d'un projet
-
-Il s'agît de la page « edit.php ». Elle affiche un formulaire reprenant les informations concernant un projet en fonction de son id.
-
-Elle permet aussi de charger une nouvelle image qui remplace l'image existante.
-
-## Spécifications techniques du projet
 
 ## Réalisations
 
