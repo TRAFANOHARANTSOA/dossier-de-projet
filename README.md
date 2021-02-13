@@ -126,6 +126,8 @@ L'application permet de créer d'accéder à l'espace d'administration. Il y a p
 
 ## Présentation du jeu d’essai 
 
+
+
 ## Veille sur les vulnérabilités de sécurité
 
 ## Recherche à partir de site anglophone
@@ -232,6 +234,33 @@ La première information qui doit sauter aux yeux du visiteur est que je suis un
 
 Pour mieux comprendre mon identité, j'ai cherché à mettre en avant mes origines, ce qui explique le logo de mon portfolio : une image au format vectoriel représentant Madagascar, mon pays d'origine. J'ai réalisé ce logo avec Adobe Illustrator, j'ai chargé une carte de Madagascar dans un format BITMAP, j'ai utilisé l'outil plume pour faire un tracé des contours puis j'ai utilisé l'outil concepteur de forme pour obtenir la version vectorisée, j'ai ensuite travaillé sur les couleurs.
 
+##### Mes compétences
+
+La partie « Mes compétences » établit comme son nom l'indique la liste des choses que je sais faire. J'ai décidé de la placer avant les *cards* présentant les projets pour produire une sorte de *teasing* : l'attraction forte du portfolio, ce sont évidemment les projets, c'est ce que les visiteurs vont chercher. Dans une logique UX, pour les contraindre à voir le reste du contenu (ou tout au moins à le survoler si ils utilisent le lien dans la barre de navigation, grâce à un effet *smooth scroll* en CSS), mes réalisations n'apparaissent que dans un troisième temps. De plus, la partie concernant mes projets dirige vers des sites externes à mon portfolio, d'où l'importance de ne pas immédiatement prendre le risque de voir le visiteur quitter le portfolio et potentiellement ne pas y revenir.
+
+##### Mon parcours
+
+Cette partie du *One Page* se divise en trois sous-partie, alignées horizontalement sur un écran de taille moyennes :
+- Mes technologies 
+- Mes formations
+- Mes expériences 
+
+##### Réalisations
+
+Présentation classique sous forme de *cards*, connectée à la base de données alimentée par le *back-office*, je liste mes projets, récupère leur titre, l'image mise-en-avant, la description et les technologies utilisées, ainsi que les liens matérialisés sous forme d'icônes.
+
+Un système de filtres en JavaScript permet de trier les projets. Par défaut, tous les projets s'affichent. On peut filter les projets selon les critères « Conception graphique », « Développement Web » et « Gestion de projet ».  
+
+
+##### Contacts
+
+La partie « contact » est composée d'un formulaire en PHP qui redirige les informations renseignées par les utilisateurs sur mon adresse mail. Il n'y a pas d'insertions de données dans la base de données sur cette fonctionnalité.
+
+##### Le Footer
+
+Le *footer* se compose de deux lignes : 
+- une partie liens vers mes réseaux sociaux sous forme d'icônes ;
+- une ligne contenant le nom de l'auteur, en l'occurence moi, et un lien vers la page « Mention Légale ». Dans une précédente version, j'avais commis l'erreur de mettre le logo « *copyright* » qu'on voit couramment, par mimétisme et manque de compréhension de ce que cela impliquait. Le « *copyright* » relève en fait du droit américain et n'a aucune valeur juridique en France.
 
 ## Spécifications techniques du projet
 
@@ -271,6 +300,4 @@ Cette base de données se compose de 2 tables. Les tables « utilisateurs » et 
 ## Réalisations
 
 ## Présentation du jeu d’essai 
-
-## Veille sur les vulnérabilités de sécurité
 
