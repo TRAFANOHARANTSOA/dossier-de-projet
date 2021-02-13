@@ -219,6 +219,20 @@ Depuis cette page, on peut aussi modifier ou supprimer un projet existant et cha
 
 > La requête pour récupérer les informations affichées sur cette page est la même que celle utilisée sur la page listant les projets de l'interface visiteur du portfolio. 
 
+#### La page de création d'un projet
+
+Il s'agît de la page « add.php ». C'est un formulaire permettant de renseigner toutes les informations concernant un nouveau projet : son titre, sa période de réalisation, se technologies, la description du projet, sa visibilité par défaut (masquée ou affichée), son image mise-en-avant, et les liens vers le projet en ligne, les maquettes *desktop* et *mobile* et son github.
+
+#### La page affichant un projet
+
+Il s'agît de la page « details.php ». Elle affiche toutes les informations concernant un projet en fonction de son id. Une icône indique la possibilité de modifier les informations, elle redirige sur la page « edit.php ». Une autre icône permete de naviguer vers la page listant les projets.
+
+#### La page de modification d'un projet
+
+Il s'agît de la page « edit.php ». Elle affiche un formulaire reprenant les informations concernant un projet en fonction de son id.
+
+Elle permet aussi de charger une nouvelle image qui remplace l'image existante.
+
 ## Spécifications techniques du projet
 
 ## Réalisations
