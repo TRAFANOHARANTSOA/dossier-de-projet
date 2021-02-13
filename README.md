@@ -130,9 +130,49 @@ L'application permet de créer d'accéder à l'espace d'administration. Il y a p
 
 ## Veille sur les vulnérabilités de sécurité
 
+Tout au long de ma formation et de mon stage en entreprise, j'ai effectué une veille régulière, principalement sur le réseau social professionnel LinkedIn. J'ai commencé par suivre des stagiaires de ma formation en développement web, puis j'ai élargis mon réseau à des professionnels du secteur, au niveau local, régionnal, national puis internationnal. J'ai pu me tenir informé de l'actualité de la discipline que j'étudie en suivant les bonnes personnes, qui communiquent sur les résultats de leur veille informationnelle, qui relaient ou publient des articles. Je me suis moi-même habitué à interragir avec des publications, en manifestant mon intérêt par des « J'aime ». Ce faisant, je pense avoir nourri l'algorithme de LinkedIn sur mes centres d'intérêts, j'ai en tous cas constaté que les propositions de publications dans mon fil d'actualité s'affinaient en terme de pertinence au fur-et-à-mesure de mon utilisation. 
+
+J'ai aussi utilisé la fonctionnalité « Actualités » du moteur de recherche Google combiné à des filtres de date et de pertinence pour identifier moi-même des articles pertinents à re-partager. Pour ce faire, j'ai utilisé des mots-clés généralistes comme « web design », « développement web », « programmation informatique », « cyber-sécurité » ou plus spécialisé, notamment des noms de technologie. 
+
+De plus, je me suis intéressé aux différentes sources d'information issues de la presse spécialisée, que ce soit les versions numériques de journaux papiers ou des blogs. Je consulte en effet régulièrement le site web « programmez.com » ainsi que « BDM - le blog du modérateur », ou « awwwwards », qui met en avant les sites web les plus spectaculaires en terme de conception graphique.
+
+Depuis que je suis un veilleur actif, les problématiques de sécurité informatique ont particulièrement retenue mon attention, les publications sur ce sujet sont nombreuses. 
+
+Durant mon stage, un article du magazine « Programmez! » m'a marqué, il s'intitule « Deviner un mot de passe en observant les épaules de celui qui le saisit » et peut être consulté à l'adresse suivante : https://www.programmez.com/actualites/deviner-un-mot-de-passe-en-observant-les-epaules-de-celui-qui-le-saisit-31154 et se réfère lui-même à l'article datant du 22 octobre 2020 intitulé « Zoom on the Keystrokes: Exploiting Video Calls for Keystroke Inference Attacks » par Anindya Maiti, et publié dans la catégorie « Cryptography and Security » sur le site de l'Université Cornell (Ithaca, New York) qui peut être consulté à cette adresse : « https://arxiv.org/abs/2010.12078 »
+
+Ces articles traitent de la technique de piratage qu'on nomme «  attaque par inférence de frappe ».
+
+> « Une attaque par inférence de frappe désigne toute méthode qui déduit ce qu'un utilisateur est en train de taper via un canal latéral, c'est-à-dire autrement qu'en regardant les mains et les doigts sur le clavier. »
+
+L'attaque par inférence de frappe consiste donc à deviner les touches sur lesquels quelqu'un que l'on regarde via un système de visio-conférence a pu taper lorsqu'il écrit des informations sensibles, par exemple un mot de passe, en regardant non pas les doigts qui ne sont pas dans le champs de la *webcam* mais les épaules. 
+
+> « Mais là où ça devient un peu un scénario à la James Bond, c'est qu'il n'est pas nécessaire que le webcam montre les mains de la personne attaquée. Il suffit qu'elle montre ses épaules pour qu'il soit possible de déterminer ce qu'elle frappe sur son clavier.  »
+
+Ce sujet est particulièrement intéressant pour des développeurs qui doivent déployer un système de visio-conférence à destination du grand public. En effet, il est tout à fait envisageable que les utilisateurs de notre système de visio-conférence basé sur la solution « BigBlueButton » suivent les *lives* sportifs depuis un PC, et laissent à certain moment la plateforme tournée en tâche de fond tout en continuant à surfer sur internet. Si leur *webcam* reste active à ce moment, ils sont extrêmement vulnérables à de potentiels autres spectateurs maîtrisant la technique de l'attaque par inférence de frappe. Mais comment cela fonctionne-t-il ? 
+
+> « Dans le cas de l'analyse des épaules, les chercheurs s'appuient sur un principe élémentaire de la mécanique newtonienne : quel que soit votre style de frappe personnel, lorsque vous appuyez sur une touche, une «force de réaction» dans la direction opposée est produite.
+>
+> Cette force se déplace ensuite des doigts sur le clavier jusqu'aux muscles et aux articulations de l'épaule, qui l'absorbent. Cette force crée des mouvements petits et subtils, mais mesurables, des épaules, explique les chercheurs, qui précisent que parce que chaque doigt est relié différemment des autres au poignet, la force de réaction d'une frappe se propage légèrement différemment à travers les muscles et les articulations des bras et des épaules, en fonction du doigt utilisé pour appuyer sur la touche... »
+
+Si la précision de cette technique est de 75% en laboratoire, elle ne permet de deviner des mots de passe que dans 25% des cas en condition réelle, notamment parce que les conditions de perception varient (luminosité, position de la caméra, etc.). Mais l'article finit sur le risque de combinaison de cette technique avec d'autres.
+
+La question qui se pose lorsqu'on est sensibilisé à cette problématique, c'est évidemment : « quelles solutions possibles ? ». Or, les études portent sur l'utilisation d'un système de visio-conférence bien précis et très utilisé et répandu : Zoom. On peut évidemment envisager que la technique puisse facilement s'étendre aux autres systèmes de visio-conférence, toutefois j'ai été attentif à cette période aux critiques apportés à l'encontre de Zoom, notamment parce que d'autres critiques, plus directement liées à des problématiques techniques, ont émergé sur la sécurité de cette application depuis le début de la crise du coronavirus. 
+
+J'ai notamment repéré un article intéressant datant du 03/11/2020 intitulé « Visioconférence : les alternatives à Zoom et Teams » et qui cite dès la première ligne la solution BigBlueButton que nous avons identifié pour répondre aux besoins exprimés et que nous avons proposé comme solution de visio-conférence puis qui a été retenu dans le cadre de notre stage. L'article en question peut être consulté à cette adresse : https://www.voyages-d-affaires.com/visioconference-alternatives-zoom-teams-20201103.html
+
+
+
 ## Recherche à partir de site anglophone
 
+
+
 ## Extrait du site anglophone
+
+
+
+
+
+
 
 
 # Projet « Portfolio »
