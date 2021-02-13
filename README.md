@@ -34,7 +34,7 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
 
 ### Expression des besoins
 
-- **Objectif :** Créer un outil de *live* interactif pour les évènements (émissions *web tv*). 
+- **Enjeux et objectifs :** Créer un outil de *live* interactif pour les évènements (émissions *web tv*). 
 - **Prise en compte de l'existant :** diffusion via Facebook Live ou Youtube Live d'émissions sportives tournées dans les locaux de l'agence Bien Encrée. 
 - **Problématiques :** 
     - besoin d'un service autonome, indépendant des grandes marques que sont Facebook et Youtube, auto-hébergé et reprenant l'identité de l'entreprise Bien Encré et de la marque Bien Tourné ;
@@ -47,6 +47,10 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
     - *Partie Administration :*
         - un compte administrateur pour gérer de comptes utilisateurs ;
         - des comptes utilisateurs ;
+- ***Benchmark :***
+    - Youtube Live ;
+    - Facebook Live ;
+    - Twitch ;
 - **Livrable attendu et critère d'évaluation de la réussite du projet :** un service fonctionnel, déployé sur un serveur de production et utilisé pour diffuser des *lives* interractifs. 
 - **Publics cibles :** 
     - les spectateurs historiques de l'émission, 
@@ -62,8 +66,28 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
 - **Du 04/11/2020 au 10/11/2020, phase d'initialisation et de lancement du projet :** recueil du besoin, identification de solutions pour solutionner les problématiques soumises à l'équipe technique, proposition de solution (la technologie GreenLight et la solution BigBlueButton) pour validation ;
 - **Du 12/11/2021 au 27/11/2021, phase de conception et de développement :** location du serveur, installation du système d'exploitation (noyeau Linux, distribution Ubuntu 16.04 Xenial Xerus LTS, serveur NGINX) et déploiement puis configuration de la solution BigBlueButton ;
 - **Du 27/11/2020 au 24/12/2021, phase de déploiement et de tests :** Personnalisation du service, phases de tests, recueil des retours utilisateurs, solutionnement de la problématique du déploiement du système de gestion de contenu WordPress qui nécessite l'utilisation d'un serveur web Apache dans son utilisation la plus courante, et qu'il fallait déployer sur NGINX ;
-- **Du 04/01/2021 au 08/01/2021, phase livraison et de fonctionnement :** 
+- **Du 04/01/2021 au 08/01/2021, phase de production et d'exploitation :** 
     - **06/01/2021 :** livraison du produit fini.
+
+
+### Extrait du Benchmark
+
+#### Youtube Live
+
+![Interface d'accueil de Youtube Live](https://i.ibb.co/T1dbgSZ/youtube-live.jpg)
+![Interface d'un Live](https://i.ibb.co/pWmQWrV/youtube-live2.jpg)
+
+- Analyse *SWOT* : 
+    - Forces : le service est connu et identifié par tout le monde, l'interface est ergonomique ;
+    - Faiblesses : surchargé, généraliste, faible transparence sur ce qu'il advient des données recueillies ;
+    - Opportunités : produire un service spécialisé qui cible un public qui connait et a confiance dans le prestataire de ce service ;
+    - Menaces : des moyens collossaux sont attribués pour le développement, la maintenance, les évolutions et l'optimisations des services proposés.
+
+#### Facebook Live
+
+#### Twitch
+
+
 
 ### Spécifications fonctionnelles
 
