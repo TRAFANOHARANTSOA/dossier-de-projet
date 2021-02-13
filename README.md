@@ -14,7 +14,7 @@
 - [ ] Créer une base de données 
 - [ ] Développer les composants d’accès aux données
 - [ ] Développer la partie back-end d’une application web ou web mobile 
-- [X]Elaborer et mettre en oeuvre des composants dans une application de gestion de contenu ou e-commerce
+- [X] Élaborer et mettre en oeuvre des composants dans une application de gestion de contenu ou e-commerce
 
 
 ## Résumé du projet
@@ -30,7 +30,29 @@ L’affichage du back-office est géré par la surcouche Greenlight que nous avo
 En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente du commanditaire. Toutefois, ce projet ne couvrant pas la totalité des champs du référetiel, j'ai décidé de présenter un second projet réalisé en cours de formation. 
 
 
-## Spécifications fonctionnelles du projet
+## Cahier des charges
+
+### Expression des besoins
+
+- **Objectif :** Créer un outil de *live* interactif pour les évènements (émissions *web tv*). 
+- **Prise en compte de l'existant :** diffusion via Facebook Live ou Youtube Live d'émissions sportives tournées dans les locaux de l'agence Bien Encrée. 
+- **Problématiques :** 
+    - besoin d'un service autonome, indépendant des grandes marques que sont Facebook et Youtube, auto-hébergé et reprenant l'identité de l'entreprise Bien Encré et de la marque Bien Tourné ;
+    - besoin de pouvoir offrir aux spectateurs la possibilité d'interragir, de communiquer dans un espace privé, géré par un prestataire de confiance - la société Bien Encré - pour ce qui est de l'utilisation des données personnelles collectées, etc. plutôt que de passer par des services grands publics hébergés en Californie et dont on ne maîtrise pas les politiques de confidentialité relevant d'un Droit différent du Droit Français.
+- **Fonctionnalités attendues :** 
+    - *Partie publique :*
+        - pouvoir diffuser du contenu vidéo à partir de liens Youtube ou Facebook ;
+        - fonctionnalité de sondage en temps réel ;
+        - système de messagerie instantanée ;
+    - *Partie Administration :*
+        - un compte administrateur pour gérer de comptes utilisateurs ;
+        - des comptes utilisateurs ;
+- **Publics cibles :** 
+    - les spectateurs historiques de l'émission, 
+    - d'éventuels nouveaux spectateurs rassurés par les problématiques solutionnées par le nouveau service proposé suite à la communication sur la mise en place de ce service.
+
+
+### Spécifications fonctionnelles
 
 ## Spécifications techniques du projet
 
