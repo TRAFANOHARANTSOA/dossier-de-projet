@@ -69,10 +69,19 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
 - **Du 04/01/2021 au 08/01/2021, phase de production et d'exploitation :** 
     - **06/01/2021 :** livraison du produit fini.
 
+### Conception graphique
 
-### Extrait du Benchmark
+#### Logo
 
-#### Youtube Live
+#### Charte graphique
+
+#### UI KIT
+
+### Stratégie *marketing*
+
+#### Extrait du *benchmark*
+
+##### Youtube Live
 
 ![Interface d'accueil de Youtube Live](https://i.ibb.co/T1dbgSZ/youtube-live.jpg)
 ![Interface d'un Live](https://i.ibb.co/pWmQWrV/youtube-live2.jpg)
@@ -83,19 +92,37 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
     - Opportunités : produire un service spécialisé qui cible un public qui connait et a confiance dans le prestataire de ce service ;
     - Menaces : des moyens collossaux sont attribués pour le développement, la maintenance, les évolutions et l'optimisations des services proposés.
 
-#### Facebook Live
+##### Facebook Live
 
-#### Twitch
+##### Twitch
 
+#### Périmètre fonctionnel et *impact mapping*
 
+![impact mapping du site bien tourné](https://i.ibb.co/2qGfBqT/impact-mapping.jpg></a>)
 
 ### Spécifications fonctionnelles
 
+#### Arborescence de l'application
+L'application permet de créer d'accéder à l'espace d'administration. Il y a plusieurs profils d'utilisateur de l'espace d'administration avec des droits différents.
+
+![Screens de l'interface](https://i.ibb.co/J7z6Tb5/1.jpg)
+
+![Screens de l'interface](https://i.ibb.co/R9ZY8C6/2.jpg)
+
+![Screens de l'interface](https://i.ibb.co/28jCk7v/3.jpg)
+
+![Screens de l'interface](https://i.ibb.co/NW9P639/4.jpg)
+
+![Screens de l'interface](https://i.ibb.co/ZJkgxg2/5.jpg)
+
+![Screens de l'interface](https://i.ibb.co/jzwLVN9/6.jpg)
 
 
 ## Spécifications techniques du projet
 
 ## Réalisations
+
+
 
 ## Présentation du jeu d’essai 
 
@@ -110,9 +137,87 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
  
 ## Liste des compétences couvertes par le projet
 
+### Développer la partie front-end d’une application web ou web mobile en intégrant les recommandations de sécurité
+
+- [X] Maquetter une application 
+- [X] Réaliser une interface utilisateur web statique et adaptable 
+- [X] Développer une interface utilisateur web dynamique
+- [ ] Réaliser une interface utilisateur avec une solution de gestion de contenu ou e-commerce
+
+### Développer la partie back-end d’une application web ou web mobile en intégrant les recommandations de sécurité
+
+- [X] Créer une base de données 
+- [X] Développer les composants d’accès aux données
+- [X] Développer la partie back-end d’une application web ou web mobile 
+- [ ] Élaborer et mettre en oeuvre des composants dans une application de gestion de contenu ou e-commerce
+
 ## Résumé du projet
 
+Dans le cadre de ma formation Access Code School, j'ai développé un portfolio pour présenter mes travaux en *Web Design* et en *Web Development*. 
+
+L'objectif de ce projet était de proposer une solution complète, développée avec des technologies *front-end* (HTML / CSS / JS et le *framework* Bootstrap) et des technologies *back-end* (PHP et MySQL).
+
+Cette solution est composée : 
+- d'une interface visiteur, récupérant dynamiquement du contenu à afficher dans une base de données ; 
+- d'un *back-office* que j'ai développé *from scratch* en PHP/MySQL pour ajouter, afficher, modifier et supprimer (*CRUD*) ;
+
+
 ## Spécifications fonctionnelles du projet
+
+### Développement *back-end*
+
+#### Conception de la base de données 
+
+##### Structure de la base de données
+
+Cette base de données se compose de 2 tables. Les tables « utilisateurs » et « projets » sont liée : lorsqu'un utilisateur crée un projet, ce projet lui est attribué, il y a donc une relation : la clé primaire de l'utilisateur est affectée comme clé secondaire au projet. 
+
+- la table « users » :
+    - id (pk)
+    - username
+    - email
+    - password
+
+- la table « projects » :
+    - id (pk)
+    - user_id (sk)
+    - title
+    - technologies
+    - description
+    - visibility (hide / visible)
+    - thumbnail 
+    - project_link
+    - mobile_mockup_link
+    - desktop_mockup_link
+    - github_link
+
+#### Modélisation de la base de données
+
+![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/XzWz6yV/mysql-workbench.jpg)
+
+### Développement de l'interface du *back-office*
+
+#### La page de connexion
+
+Il s'agît de la page « index.php ». Elle se compose d'un formulaire de connexion permettant de renseigner un nom d'utilisateur et un mot de passe. Le script vérifie si ce nom d'utilisateur et ce mot de passe sont enregistrés dans la base de données, si c'est le cas, on accède à la page « home.php ». Dans le cas contraire, on reste sur cette page, qui propose aussi un lien vers la page « register.php » permettant de soumettre une demande d'inscription.
+
+#### La page d'inscription d'un nouvel utilisateur
+
+Il s'agît de la page « register.php » Elle permet de soumettre une demande d'inscription via un formulaire. Le visiteur doit renseigner un nom d'utilisateur, un email et un mot de passe, qu'il doit re-taper par sécurité dans un second champs de type *password*.
+
+Lorsqu'un utilisateur soumet une inscription, le programme vérifie la correspondance des deux mots de passe saisie puis crypte le mot de passe avant de l'insérer dans la base de données.
+
+#### La page listant les projets
+
+Il s'agît de la page « home.php ». Cette page se connecte à la base de données et affiche le titre de tous les projets contenus dans la table « projects », ainsi que leurs technologies. 
+
+En cliquant sur l'icone représentant une page web, on accède à la page « details.php » pour consultation des informations enregistrées en base de données concernant le projet sélectionné.
+
+Un bouton « ajouter un projet » permet d'accéder à la page « add.php ». 
+
+Depuis cette page, on peut aussi modifier ou supprimer un projet existant et changer sa visibilité, ou encore se déconnecter du *back-office*.
+
+> La requête pour récupérer les informations affichées sur cette page est la même que celle utilisée sur la page listant les projets de l'interface visiteur du portfolio. 
 
 ## Spécifications techniques du projet
 
@@ -122,6 +227,3 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
 
 ## Veille sur les vulnérabilités de sécurité
 
-## Recherche à partir de site anglophone
-
-## Extrait du site anglophone
