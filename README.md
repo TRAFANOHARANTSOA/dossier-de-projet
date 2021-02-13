@@ -47,12 +47,27 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
     - *Partie Administration :*
         - un compte administrateur pour gérer de comptes utilisateurs ;
         - des comptes utilisateurs ;
+- **Livrable attendu et critère d'évaluation de la réussite du projet :** un service fonctionnel, déployé sur un serveur de production et utilisé pour diffuser des *lives* interractifs. 
 - **Publics cibles :** 
     - les spectateurs historiques de l'émission, 
     - d'éventuels nouveaux spectateurs rassurés par les problématiques solutionnées par le nouveau service proposé suite à la communication sur la mise en place de ce service.
+- **Ressources humaines allouées à la conception et à la réalisation du projet :**
+    - Pilotage du projet : Thomas Hazebrouck, dirigeant de l'agence Bien Encré ;
+    - Conception et réalisation : Dimitri Hoerth, Adeline Levionnois, Marius Paquet, Tsiry Rafanoharantsoa, stagiaires ;
+- **Ressources matérielles allouées :** un serveur dédidé, loué chez OVH, offre infra 2 : 64Mo / 2*1 To SSD / 2*3ToHDD ;
 
+> Remarque : le choix de la solution d’hébergement s'est porté sur OVH car les serveurs proposés par IONOS ne supportent pas Ubuntu 16.04 qui est nécessaire pour faire tourner « Bigbluebutton », la solution identifiée.
+
+### Cadre temporel
+- **Du 04/11/2020 au 10/11/2020, phase d'initialisation et de lancement du projet :** recueil du besoin, identification de solutions pour solutionner les problématiques soumises à l'équipe technique, proposition de solution (la technologie GreenLight et la solution BigBlueButton) pour validation ;
+- **Du 12/11/2021 au 27/11/2021, phase de conception et de développement :** location du serveur, installation du système d'exploitation (noyeau Linux, distribution Ubuntu 16.04 Xenial Xerus LTS, serveur NGINX) et déploiement puis configuration de la solution BigBlueButton ;
+- **Du 27/11/2020 au 24/12/2021, phase de déploiement et de tests :** Personnalisation du service, phases de tests, recueil des retours utilisateurs, solutionnement de la problématique du déploiement du système de gestion de contenu WordPress qui nécessite l'utilisation d'un serveur web Apache dans son utilisation la plus courante, et qu'il fallait déployer sur NGINX ;
+- **Du 04/01/2021 au 08/01/2021, phase livraison et de fonctionnement :** 
+    - **06/01/2021 :** livraison du produit fini.
 
 ### Spécifications fonctionnelles
+
+
 
 ## Spécifications techniques du projet
 
