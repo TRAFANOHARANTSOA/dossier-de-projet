@@ -73,6 +73,8 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
 
 #### Logo
 
+![Logo Bien-tourné](https://i.ibb.co/2yYw3mq/logo.jpg)
+
 #### Charte graphique
 
 #### UI KIT
@@ -197,7 +199,7 @@ J'ai notamment repéré un article intéressant datant du 03/11/2020 intitulé �
 
 Dans le cadre de ma formation Access Code School, j'ai développé un portfolio pour présenter mes travaux en *Web Design* et en *Web Development*. 
 
-L'objectif de ce projet était de proposer une solution complète, développée avec des technologies *front-end* (HTML / CSS / JS et le *framework* Bootstrap) et des technologies *back-end* (PHP et MySQL).
+L'objectif de ce projet était de proposer une solution complète, développée avec des technologies *front-end* (HTML / CSS / JS et le *framework* Bootstrap) et des technologies *back-end* (PHP et MySQL). 
 
 Cette solution est composée : 
 - d'une interface visiteur, récupérant dynamiquement du contenu à afficher dans une base de données ; 
@@ -306,11 +308,51 @@ Le *footer* se compose de deux lignes :
 
 ### Développement *back-end*
 
+#### Présentation de la solution
+
+Pour répondre à l'ojectif de présentation de mes travaux en *Web Design* et en *Web Development*, j'ai choisi de créer un site *one page* personnalisé en *flat design* avec de couleurs rassurantes et de tendances. En plus d'un bon visuel, l'interface visiteur est connecté à une base de donnée et affiche son contenu en dynamique. Pour confirmer par la pratique les technologies citées dans les compétences, j'ai proposé de créer un *back-office* que j'ai développé *from scratch* en PHP/MySQL et qui gèrer l'ajout, l'affichage, la modification et suppression (*CRUD*) ;
+
+#### Choix technologiques
+
+J'ai choisi les technologies en fonction de mon niveau d'expertise sur les technologies mais aussi en considérant la dimension personnel du projet. 
+
+##### Technologie de gestion du projet
+
+**Git**
+
+J'ai utilisé cet outil pour versionner mon code au fur et à mesure des avancées du projet. De cette manière, je pouvais me repositionner sur une version antérieur dans le cas d'une perte accindentèle du code. C'est un outil de développement sécurisant et indispensable 
+
+**Github**
+
+J'ai utilisé cette plateforme collaborative pour poster le projet dans un but principalement de partage. Etant donné que je menais le projet en individuel, je n'ai pas eu à utiliser et à gérer les problématiques des *merge* lors des *pull* et *push* comme ça avais été le cas sur d'autres projets de groupe en formation. Néanmoins, j'ai créé un repository du projet dans lequel je faisais régulièrement des *push*. J'ai créé une petite déscription du projet sur le *repository* et fais en sorte que les commentaires de mes *commit* soient les plus représentatifs des fonctionnalités ou des étapes franchies.
+
+##### Technologie de développement utilisé 
+
+j'ai structuré le code de manière classique sans utilisé une bibliothèque de *pattern Model View Controller*. Le projet n'étant pas d'envergure. Un code bien organisé et bien structuré suffisait amplement même pour l'entretien du site en phase d'exploitation. Mais dans une logique d'amélioration, cela constituerais la prochaine étape du projet.
+
+**Intégration avec HTML, Boostrap et CSS**
+
+Pour le *back-office*, les  pages web sont intégrés en HTML. Bootstrap 5 est utilisé pour gérer la responsivité, il intègre une librairie CSS.  Contrairement à ces précédentes versions pour gérer le dynamisme de l'interface, la version 5 n'utilise plus *JQUERY* au profit de code pur *Javascript*. J'ai modifié le CSS de Bootstrap à plusieurs niveau du site.
+
+**MYSQL**
+
+La partie interaction avec la base de donnée est gérée avec des requêtes SQL. Je me connecte à ma base en locale dans PHPMYADMIN par le protocole PDO de MySQL. J'ai opté pour ce mode de connexion pour faciliter la migration de la base sur un autre gestionnaire tel que Oracle si le besoin se présente, contrairement au protocole *mysqli* qui est propre à MySQL.
+
+**MySQL Workbench**
+
+Pour formaliser le Modèle Conceptuel de Données, le Modèle Logique de Données et le Modèle Physique de Données. J'ai utilisé MySQL Workbench.
+
+**PHP**
+
+Je combine les requêtes SQL avec des boucles et des conditions PHP pour gérer le transfert des informations entre les pages et le traitement des données dans la base. Par souci de sécurité, à chaque formulaire remplie, je néttoie les données fournies avec les fonctions *strip_tags* pour nettoyer les informations renseignées de balises script ou autres injectées par des utilisateurs maladroits, *prepare* pour la préparation de la reqûete et *bindValue* pour accrocher les paramètres lors de l'insertion en base.
+
+De la même manière je gère la récupération des données lors de l'affichage, mes requêtes sont enveloppées dans du SQL mais sans la partie sécurité.
+
 #### Conception de la base de données 
 
 ##### Structure de la base de données
 
-Cette base de données se compose de 2 tables. Les tables « utilisateurs » et « projets » sont liée : lorsqu'un utilisateur crée un projet, ce projet lui est attribué, il y a donc une relation : la clé primaire de l'utilisateur est affectée comme clé secondaire au projet. 
+Cette base de données se compose de 2 tables. Les tables « utilisateurs » et « projets » sont liées : lorsqu'un utilisateur crée un projet, ce projet lui est attribué, il y a donc une relation : la clé primaire de l'utilisateur est affectée comme clé secondaire au projet. 
 
 - la table « users » :
     - id (pk)
