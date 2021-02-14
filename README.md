@@ -310,7 +310,7 @@ Le *footer* se compose de deux lignes :
 
 #### Présentation de la solution
 
-Pour répondre à l'objectif de présentation de mes travaux en *Web Design* et en *Web Development*, j'ai choisi de créer un site *one page* personnalisé en *flat design* avec de couleurs rassurantes et de tendances. En plus d'un bon visuel, l'interface visiteur est connecté à une base de donnée et affiche son contenu en dynamique. Pour confirmer par la pratique les technologies citées dans les compétences, j'ai proposé de créer un *back-office* que j'ai développé *from scratch* en PHP/MySQL et qui gèrer l'ajout, l'affichage, la modification et suppression (*CRUD*) ;
+Pour répondre à l'objectif de présentation de mes travaux en *Web Design* et en *Web Development*, j'ai choisi de créer un site *one page* personnalisé en *flat design* avec des couleurs rassurantes et de tendances. En plus d'un bon visuel, l'interface visiteur est connecté à une base de donnée et affiche son contenu en dynamique. Pour confirmer par la pratique les technologies citées dans les compétences, j'ai proposé de créer un *back-office* que j'ai développé *from scratch* en PHP/MySQL et qui gèrer l'ajout, l'affichage, la modification et suppression (*CRUD*) ;
 
 #### Choix technologiques
 
