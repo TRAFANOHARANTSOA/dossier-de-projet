@@ -129,8 +129,8 @@ En l'absence d'encadrement technique au sein de la structure d'accueil, il nous 
 
 **Solution d'hébergement**
 
-Un serveur dédié *bare meta* chez OVH a été loué pour héberger Bigbluebutton. Nous l'avons doté d'uns bonne capacité de stockage (500Go), utile pour les enregistrements des sessions
-Les technologies utilisées par l'application génére d'important flux imporantants. Nous avons considérés que les flux audio et vidéos générés lorsque les *webcams* des quelques centaines de personnes sont activés recquiert une importante bande passante si le cas se présentais. Nous avons établi notre bande passante à 1Gbits/s. La configuration minimale recquise du serveur étant fixé à 250Mbits/s.
+Un serveur dédié *bare metal (métal nu)* chez OVH a été loué pour héberger Bigbluebutton. Nous l'avons doté d'une bonne capacité de stockage (500Go), utile pour les enregistrements des sessions.
+Les technologies utilisées par l'application générent d'importants flux de données. Nous avons considérés que les flux audio et vidéos générés lorsque les *webcams* des quelques centaines de personnes sont activés recquiert une importante bande passante si le cas se présentais. Nous avons établi notre bande passante à 1Gbits/s. La configuration minimale recquise du serveur étant fixé à 250Mbits/s.
 
 **Système d'exploitation Linux**
 
@@ -145,11 +145,12 @@ Le SSH est le protocole d'installation attitré à Bigbluebutton. Pour le transf
 Le serveur Web utilisé par Bigbluebutton est Nginx.
 
 **Gestion de l'affichage**
-C'est l'outil de gestion d'affichage par excellence pour Bigbluebutton. Greenlight  est une application Ruby on Rails qui fournit une interface simple aux utilisateurs pour créer des salles, démarrer des réunions et gérer les enregistrements. Il intègre un support complet pour la gestion des comptes utilisateurs. Greenlight permet également aux utilisateurs de mettre à jour les informations de leur compte à tout moment (mot de passe, image de profil, etc).
+
+Greenlight  est une application Ruby on Rails qui fournit une interface simple aux utilisateurs pour créer des salles, démarrer des réunions et gérer les enregistrements. Il intègre un support complet pour la gestion des comptes utilisateurs. Greenlight permet également aux utilisateurs de mettre à jour les informations de leur compte à tout moment (mot de passe, image de profil, etc).
 
 **Gestion de la sécurité**
 
-Pour le sécurisé nous avons ajouter le support SSL à notre serveur BigBlueButton. De plus, sur certaine version de navigateur comme chrome 47, les utilisateurs de Chrome ne peuvent pas partager leur microphone via WebRTC à moins que BigBlueButton ne soit chargé via HTTPS. Pour ce faire, nous avons attribué un nom d'hôte à notre serveur BigBlueButton en l'occurence "Bien-tournér.fr". Un certificat SSL existait déjà sur ce domaine. Nous avions configuré Nginx pour utiliser SSL et afficher du contenu en HTTPS.
+Pour la sécurité nous avons ajouter le support SSL à notre serveur BigBlueButton. De plus, sur certaine version de navigateur comme chrome 47, les utilisateurs de Chrome ne peuvent pas partager leur microphone via WebRTC à moins que BigBlueButton ne soit chargé via HTTPS. Pour ce faire, nous avons attribué un nom d'hôte à notre serveur BigBlueButton en l'occurence "Bien-tournér.fr". Un certificat SSL existait déjà sur ce domaine. Nous avions configuré Nginx pour utiliser SSL et afficher du contenu en HTTPS.
 
 ### Accéssibilité et adaptabilité
 
