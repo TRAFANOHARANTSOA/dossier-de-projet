@@ -163,15 +163,20 @@ L'outil bigbluebutton est adaptable à tout type d'appareil. Il intègre égalem
 Après avoir retenue Bigbluebutton comme solution à mettre en place et obtnue l'accès au serveur d'hébergement, j'ai commencé par l'installation du système d'exploitation du serveur avec mon collègue Marius Paquet. OVH intègre un service d'installation automatique. Nous avons eu recours à cette procédure. Pour cela, j'ai paramétré l'installation avant de la lancée. J'ai effectuée les actions ci dessous : 
 
 - Cliquer sur les trois points dans la partie "Système OS (Non installé)" puis choisir le noyau et la distribution souhaité  :
+
 ![Procédure d'installation de l'OS](https://i.ibb.co/KNXK7ws/boutoninstall.png)
 
 
 - Choisir un template d’installation OVH pour accéder à l’installation automatique des systèmes d'exploitation supportés par le serveur dédié et cliquer sur suivant :
+
 ![Procédure d'installation de l'OS](https://i.ibb.co/PGrRssp/choixtemplatesdinstallation.png)
+
 ![Procédure d'installation de l'OS](https://i.ibb.co/G9gvmFD/choixOS.png)
+
 ![Procédure d'installation de l'OS](https://i.ibb.co/NWjNCqp/noyaulinux.png)
 
 Nous avons lancé l'installation une fois le paramétrage términé. La deuxième illustration ci-dessous informe sur le système d'exploitation installé avec toutes ses caractéristiques.
+
 ![Procédure d'installation de l'OS](https://i.ibb.co/3fC9Sts/runinstallovh.png)
 ![Procédure d'installation de l'OS](https://i.ibb.co/DMpP3j2/endinstall-OS.png)
 
