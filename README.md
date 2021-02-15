@@ -150,7 +150,7 @@ Greenlight  est une application Ruby on Rails qui fournit une interface simple a
 
 **Gestion de la sécurité**
 
-Pour la sécurité nous avons ajouter le support SSL à notre serveur BigBlueButton. De plus, sur certaine version de navigateur comme chrome 47, les utilisateurs de Chrome ne peuvent pas partager leur microphone via WebRTC à moins que BigBlueButton ne soit chargé via HTTPS. Pour ce faire, nous avons attribué un nom d'hôte à notre serveur BigBlueButton en l'occurence "Bien-tournér.fr". Un certificat SSL existait déjà sur ce domaine. Nous avions configuré Nginx pour utiliser SSL et afficher du contenu en HTTPS.
+Pour la sécurité, nous avons ajouter le support SSL à notre serveur BigBlueButton. De plus, sur certaine version de navigateur comme chrome 47, les utilisateurs de Chrome ne peuvent pas partager leur microphone via WebRTC à moins que BigBlueButton ne soit chargé via HTTPS. Pour ce faire, nous avons attribué un nom d'hôte à notre serveur BigBlueButton en l'occurence "Bien-tournér.fr". Un certificat SSL existait déjà sur ce domaine. Nous avions configuré Nginx pour utiliser SSL et afficher du contenu en HTTPS.
 
 ### Accéssibilité et adaptabilité
 
@@ -158,6 +158,101 @@ L'outil bigbluebutton est adaptable à tout type d'appareil. Il intègre égalem
 
 ## Réalisations
 
+**installation du système d'exploitation**
+
+Après avoir retenue Bigbluebutton comme solution à mettre en place et obtnue l'accès au serveur d'hébergement, j'ai commencé par l'installation du système d'exploitation du serveur avec mon collègue Marius Paquet. OVH intègre un service d'installation automatique. Nous avons eu recours à cette procédure. Pour cela, j'ai paramétré l'installation avant de la lancée. J'ai effectuée les actions ci dessous : 
+
+- Cliquer sur les trois points dans la partie "Système OS (Non installé)" puis choisir le noyau et la distribution souhaité  :
+![Procédure d'installation de l'OS](https://i.ibb.co/KNXK7ws/boutoninstall.png)
+
+
+- Choisir un template d’installation OVH pour accéder à l’installation automatique des systèmes d'exploitation supportés par le serveur dédié et cliquer sur suivant :
+![Procédure d'installation de l'OS](https://i.ibb.co/PGrRssp/choixtemplatesdinstallation.png)
+![Procédure d'installation de l'OS](https://i.ibb.co/G9gvmFD/choixOS.png)
+![Procédure d'installation de l'OS](https://i.ibb.co/NWjNCqp/noyaulinux.png)
+
+Nous avons lancé l'installation une fois le paramétrage términé. La deuxième illustration ci-dessous informe sur le système d'exploitation installé avec toutes ses caractéristiques.
+![Procédure d'installation de l'OS](https://i.ibb.co/3fC9Sts/runinstallovh.png)
+![Procédure d'installation de l'OS](https://i.ibb.co/DMpP3j2/endinstall-OS.png)
+
+**Installation de l'application Bigbluebutton**
+
+Comme précisé plutôt, l'installation se fait par le protocole SSH. A la fin de l'installation du système d'exploitation, nous avons reçu un mail de confirmation et les accès au serveur. Il y a trois type d'installation possible de l'outil, une procédure qui s'appelle bbb-instal.sh qui est une configuration rapide, une autre dénommé Ansible pour les déploiements à grande échelle et la dernière l'étape par étape. Nous avons utilisé la procédure bbb-instal.sh qui est un script shell automatisant l'insatallation pas à pas. Les conditions de réussites son les même pour les trois c'est à dire : obtenir un serveur dédié, s'assurer que le serveur répond aux exigences minimales de BigBlueButton, attribuer un nom d'hôte (recommandé pour configurer SSL) et configurer le pare-feu du serveur (si nécessaire). 
+
+Avant l'installation, nous avons effectuée une série de vérification obligatoire. 
+
+- Vérification des paramètres régionaux du serveur si ils sont en_US.UTF-8 par les commandes ci dessous avec les résultats obtenus: 
+
+    $ cat /etc/default/locale
+    
+    LANG="en_US.UTF-8"
+
+    $ sudo systemctl show-environment
+
+    LANG=en_US.UTF-8
+
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+- Vérification de la quantité de mémoire minimale de 4Go reccquise en lancant la $ free -h
+ 
+- Vérification de la distribution Ubuntu 16.04 
+
+        $  cat /etc/lsb-release
+        DISTRIB_ID=Ubuntu
+        DISTRIB_RELEASE=16.04
+        DISTRIB_CODENAME=xenial
+        DISTRIB_DESCRIPTION="Ubuntu 16.04.x LTS"
+
+- Vérification de la prise en charge des adresses Ipv6 :
+
+        $ ip addr | grep inet6
+        inet6 ::1/128 scope host
+        ...
+
+- Vérification de la version du noyau Linux, la version requise est la 4: 
+
+        $ uname -r
+
+        4.15.0-38-generic
+
+- Vérification du processeur du serveur  à 4 cœurs au moins :
+
+        $ cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l
+
+        4
+
+Au même titre que les vérifications ci dessus, une mise à jour du serveur est obligatoire pour qu'il soit à niveaur sur les derniers packages et mises à jour de sécurité. Avant cela, quelques petites vérification devaient être effectué sur le serveur lui même. Grosso modo, la commande que j'ai lancé pour la mise à niveau du serveur est :
+
+$ sudo apt-get update
+
+$ sudo apt-get dist-upgrade
+
+La signature numérique des packages pour BigBlueButton sont faite avec la clé publique du projet. Il était nécessaire de rajouter à la châine de clés du serveur la clé publique du projet.
+
+$ wget https://ubuntu.bigbluebutton.org/repo/bigbluebutton.asc -O- | sudo apt-key add - 
+
+En finalité, nous avons lancé le script shell bbb-install.sh qui démarre le processus d'installation de Bigbluebutton. Cette commande est la suivante : 
+
+wget -qO- https://ubuntu.bigbluebutton.org/bbb-install.sh | bash -s -- -w -a -v xenial-22 -s bbb.example.com -e info@example.com
+
+**Erreur 500**
+
+Au moment du premier test de connexion à une salle de réunion sur l'API démo, l'application qui gère la création et l'accès aux salons, nous avons rencontrée une erreur 500. Le problème vennais du l'adresse IP, il ne correspondait pas au nom d'hote. J'ai donc lancé la commande bbb-conf --setip <adresse IP du serveur> pour résoudre le problème.
+
+![Procédure d'installation de l'OS](https://i.ibb.co/72ZGCfg/setipbbb.png)
+
+**installation de Greenlight**
+
+Une fois le problème de l'adresse IP qui ne résout pas sur le nom d'hôte résolu, j'ai désinstallé l'API démo pour le remplacer par Greenlight, une plateforme qui présente les meilleures pratiques d'utilisation de l'API BigBlueButton. Il est fortement recommandé d'utiliser Docker lors de l'installation de Greenlight sur un serveur BigBlueButton. La procédure consiste à lancer les commandes suivantes : 
+
+        docker -v
+        mkdir ~/greenlight && cd ~/greenlight
+        docker run --rm bigbluebutton/greenlight:v2 bundle exec rake secret
+
+
+Grosso modo, la première commande vérifie si docker existe sinon, il faute engager une autore procédur pour l'installer. Puis vient la création du repértoire *greenlight* pour la configuration. La dernière génère le fichier de configuration .env et installe Greenlight qui est enveloppée dans une image de Docker. Greenlight a besoin d'une clé secrète pour fonctionner en production. J'ai lancé la commande ci dessous pour la générée et pouvoir définir sur cette clé le *SECRET_KEY_BASE* dans le fichier .env .: 
+
+        docker run --rm bigbluebutton/greenlight:v2 bundle exec rake secret
 
 
 ## Présentation du jeu d’essai 
