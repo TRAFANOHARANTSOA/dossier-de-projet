@@ -183,15 +183,11 @@ Avant l'installation, nous avons effectuée une série de vérification obligato
 
 - Vérification des paramètres régionaux du serveur si ils sont en_US.UTF-8 par les commandes ci dessous avec les résultats obtenus: 
 
-    $ cat /etc/default/locale
-    
-    LANG="en_US.UTF-8"
-
-    $ sudo systemctl show-environment
-
-    LANG=en_US.UTF-8
-
-    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+        $ cat /etc/default/locale
+        LANG="en_US.UTF-8"
+        $ sudo systemctl show-environment
+        LANG=en_US.UTF-8
+        PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 - Vérification de la quantité de mémoire minimale de 4Go reccquise en lancant la $ free -h
  
@@ -212,20 +208,17 @@ Avant l'installation, nous avons effectuée une série de vérification obligato
 - Vérification de la version du noyau Linux, la version requise est la 4: 
 
         $ uname -r
-
         4.15.0-38-generic
 
 - Vérification du processeur du serveur  à 4 cœurs au moins :
 
         $ cat /proc/cpuinfo | awk '/^processor/{print $3}' | wc -l
-
         4
 
 Au même titre que les vérifications ci dessus, une mise à jour du serveur est obligatoire pour qu'il soit à niveaur sur les derniers packages et mises à jour de sécurité. Avant cela, quelques petites vérification devaient être effectué sur le serveur lui même. Grosso modo, la commande que j'ai lancé pour la mise à niveau du serveur est :
 
-$ sudo apt-get update
-
-$ sudo apt-get dist-upgrade
+        $ sudo apt-get update
+        $ sudo apt-get dist-upgrade
 
 La signature numérique des packages pour BigBlueButton sont faite avec la clé publique du projet. Il était nécessaire de rajouter à la châine de clés du serveur la clé publique du projet.
 
