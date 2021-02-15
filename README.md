@@ -47,10 +47,7 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
     - *Partie Administration :*
         - un compte administrateur pour gérer de comptes utilisateurs ;
         - des comptes utilisateurs ;
-- ***Benchmark :***
-    - Youtube Live ;
-    - Facebook Live ;
-    - Twitch ;
+
 - **Livrable attendu et critère d'évaluation de la réussite du projet :** un service fonctionnel, déployé sur un serveur de production et utilisé pour diffuser des *lives* interractifs. 
 - **Publics cibles :** 
     - les spectateurs historiques de l'émission, 
@@ -71,11 +68,9 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
 
 ### Conception graphique
 
-#### Logo
-
-![Logo Bien-tourné](https://i.ibb.co/2yYw3mq/logo.jpg)
-
 #### Charte graphique
+
+![Logo et couleur Bien-tourné](https://i.ibb.co/g3YrStC/charte-graphique-bien-tourenr.png)
 
 #### UI KIT
 
@@ -84,28 +79,32 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
 #### Extrait du *benchmark*
 
 ##### Youtube Live
-
+##### Facebook Live
 ![Interface d'accueil de Youtube Live](https://i.ibb.co/T1dbgSZ/youtube-live.jpg)
-![Interface d'un Live](https://i.ibb.co/pWmQWrV/youtube-live2.jpg)
-
+![Interface d'un Live](https://i.ibb.co/0tfSBCj/youtubelive.jpg)
+![Interface d'un compte](https://i.ibb.co/CW93pZq/compteyoutube.jpg )
 - Analyse *SWOT* : 
-    - Forces : le service est connu et identifié par tout le monde, l'interface est ergonomique ;
+    - Forces : les services sont connus et identifiés par tout le monde, l'interface est ergonomique ;
     - Faiblesses : surchargé, généraliste, faible transparence sur ce qu'il advient des données recueillies ;
     - Opportunités : produire un service spécialisé qui cible un public qui connait et a confiance dans le prestataire de ce service ;
     - Menaces : des moyens collossaux sont attribués pour le développement, la maintenance, les évolutions et l'optimisations des services proposés.
 
-##### Facebook Live
-
-##### Twitch
 
 #### Périmètre fonctionnel et *impact mapping*
 
 ![impact mapping du site bien tourné](https://i.ibb.co/2qGfBqT/impact-mapping.jpg></a>)
 
 ### Spécifications fonctionnelles
+Dans cette partie du projet, nous avons choisies une palette de couleur à utiliser pour l'interface de Greenlight. En effet, un des critères attendus du site c'est la cohérence des couleurs avec le logo de la marque. J'ai créé une petite plateforme graphique composée uniquement des couleurs du logo sans la typographie.
+
 
 #### Arborescence de l'application
-L'application permet de créer d'accéder à l'espace d'administration. Il y a plusieurs profils d'utilisateur de l'espace d'administration avec des droits différents.
+L'application permet d'accéder à l'espace d'administration ou utilisateur selon le profil de connexion. Les droits son gérés par l'administrateur depuis son espace.
+
+![Screens de l'interface](https://i.ibb.co/qmnDN6f/arborescencebientourn.png)
+
+#### Visuel du site
+Une des spécificité de ce projet concenant la partie conception, c'est que nous n'avons pas eu à créer une maquette. En effet, la surcouche Greenlight a déjà son propre affichage. Toutefois, il est intéressant de présenter un visuel du site :
 
 ![Screens de l'interface](https://i.ibb.co/J7z6Tb5/1.jpg)
 
@@ -121,6 +120,40 @@ L'application permet de créer d'accéder à l'espace d'administration. Il y a p
 
 
 ## Spécifications techniques du projet
+
+### Choix technologiques
+
+En l'absence d'encadrement technique au sein de la structure d'accueil, il nous fallait identifier un outil à implementer en autonomie. C'est la contrainte la plus importante que nous devions considérées lors de la recherche de solution durant la phase d'initialisation du projet.  Nous avons basé notre choix de l'outil Bigbluebutton sur sa facilité de prise en main grâce à sa documentation très élaborée. 
+
+### Domaine et hébergement
+
+**Solution d'hébergement**
+
+Un serveur dédié *bare meta* chez OVH a été loué pour héberger Bigbluebutton. Nous l'avons doté d'uns bonne capacité de stockage (500Go), utile pour les enregistrements des sessions
+Les technologies utilisées par l'application génére d'important flux imporantants. Nous avons considérés que les flux audio et vidéos générés lorsque les *webcams* des quelques centaines de personnes sont activés recquiert une importante bande passante si le cas se présentais. Nous avons établi notre bande passante à 1Gbits/s. La configuration minimale recquise du serveur étant fixé à 250Mbits/s.
+
+**Système d'exploitation Linux**
+
+Sur recommandation de la documentation, nous avons mis en place une distribution Ubuntu 16.04 -Xenial xerus -  64 bits exécutant le noyau Linux.
+
+**Protocole utilisé**
+
+Le SSH est le protocole d'installation attitré à Bigbluebutton. Pour le transfert des fichiers, j'ai utilisé le protocole FTP. 
+
+**Serveur Web**
+
+Le serveur Web utilisé par Bigbluebutton est Nginx.
+
+**Gestion de l'affichage**
+C'est l'outil de gestion d'affichage par excellence pour Bigbluebutton. Greenlight  est une application Ruby on Rails qui fournit une interface simple aux utilisateurs pour créer des salles, démarrer des réunions et gérer les enregistrements. Il intègre un support complet pour la gestion des comptes utilisateurs. Greenlight permet également aux utilisateurs de mettre à jour les informations de leur compte à tout moment (mot de passe, image de profil, etc).
+
+**Gestion de la sécurité**
+
+Pour le sécurisé nous avons ajouter le support SSL à notre serveur BigBlueButton. De plus, sur certaine version de navigateur comme chrome 47, les utilisateurs de Chrome ne peuvent pas partager leur microphone via WebRTC à moins que BigBlueButton ne soit chargé via HTTPS. Pour ce faire, nous avons attribué un nom d'hôte à notre serveur BigBlueButton en l'occurence "Bien-tournér.fr". Un certificat SSL existait déjà sur ce domaine. Nous avions configuré Nginx pour utiliser SSL et afficher du contenu en HTTPS.
+
+### Accéssibilité et adaptabilité
+
+L'outil bigbluebutton est adaptable à tout type d'appareil. Il intègre également des palettes de couleurs accéssibles aux mal voyants. 
 
 ## Réalisations
 
