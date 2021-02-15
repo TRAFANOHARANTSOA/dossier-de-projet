@@ -222,11 +222,11 @@ Au même titre que les vérifications ci dessus, une mise à jour du serveur est
 
 La signature numérique des packages pour BigBlueButton sont faite avec la clé publique du projet. Il était nécessaire de rajouter à la châine de clés du serveur la clé publique du projet.
 
-$ wget https://ubuntu.bigbluebutton.org/repo/bigbluebutton.asc -O- | sudo apt-key add - 
+        $ wget https://ubuntu.bigbluebutton.org/repo/bigbluebutton.asc -O- | sudo apt-key add - 
 
 En finalité, nous avons lancé le script shell bbb-install.sh qui démarre le processus d'installation de Bigbluebutton. Cette commande est la suivante : 
 
-wget -qO- https://ubuntu.bigbluebutton.org/bbb-install.sh | bash -s -- -w -a -v xenial-22 -s bbb.example.com -e info@example.com
+        wget -qO- https://ubuntu.bigbluebutton.org/bbb-install.sh | bash -s -- -w -a -v xenial-22 -s bbb.example.com -e info@example.com
 
 **Erreur 500**
 
