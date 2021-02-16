@@ -201,7 +201,7 @@ Le domaine bien-tourné.fr existait déjà et était dirigé sur un serveur mutu
 
 **Installation de l'application Bigbluebutton**
 
-Comme précisé plutôt, l'installation se fait par le protocole SSH. A la fin de l'installation du système d'exploitation, nous avons reçu un mail de confirmation et les accès au serveur. Il y a trois type d'installation possible de l'outil, une procédure qui s'appelle bbb-instal.sh qui est une configuration rapide, une autre dénommé Ansible pour les déploiements à grande échelle et la dernière l'étape par étape. Nous avons utilisé la procédure bbb-instal.sh qui est un script shell automatisant l'insatallation pas à pas. Les conditions de réussites son les même pour les trois c'est à dire : obtenir un serveur dédié, s'assurer que le serveur répond aux exigences minimales de BigBlueButton, attribuer un nom d'hôte (recommandé pour configurer SSL) et configurer le pare-feu du serveur (si nécessaire). 
+Comme précisé plutôt, l'installation se fait par le protocole SSH. A la fin de l'installation du système d'exploitation, nous avons reçu un mail de confirmation et les accès au serveur. Il y a trois type d'installation possible de l'outil, une procédure qui s'appelle bbb-instal.sh qui est une configuration rapide, une autre dénommé Ansible pour les déploiements à grande échelle et la dernière l'étape par étape. Nous avons utilisé la procédure bbb-instal.sh qui est un script shell automatisant l'installation pas à pas. Les conditions de réussites son les même pour les trois c'est à dire : obtenir un serveur dédié, s'assurer que le serveur répond aux exigences minimales de BigBlueButton, attribuer un nom d'hôte (recommandé pour configurer SSL) et configurer le pare-feu du serveur (si nécessaire). 
 
 Avant l'installation, nous avons effectuée une série de vérification obligatoire. 
 
@@ -213,7 +213,7 @@ Avant l'installation, nous avons effectuée une série de vérification obligato
         LANG=en_US.UTF-8
         PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-- Vérification de la quantité de mémoire minimale de 4Go reccquise en lancant la $ free -h
+- Vérification de la quantité de mémoire minimale de 4Go reccquise en lancant la commande $ free -h
  
 - Vérification de la distribution Ubuntu 16.04 
 
@@ -269,7 +269,7 @@ Une fois le problème de l'adresse IP qui ne résout pas sur le nom d'hôte rés
         docker run --rm bigbluebutton/greenlight:v2 bundle exec rake secret
 
 
-Grosso modo, la première commande vérifie si docker existe sinon, il faute engager une autore procédur pour l'installer. Puis vient la création du repértoire *greenlight* pour la configuration. La dernière génère le fichier de configuration .env et installe Greenlight qui est enveloppée dans une image de Docker. Greenlight a besoin d'une clé secrète pour fonctionner en production. J'ai lancé la commande ci dessous pour la générée et pouvoir définir sur cette clé le *SECRET_KEY_BASE* dans le fichier .env .: 
+Grosso modo, la première commande vérifie si docker existe sinon, engager une autre procédure pour l'installer. Puis vient la création du repértoire *greenlight* pour la configuration. La dernière génère le fichier de configuration .env et installe Greenlight qui est enveloppée dans une image de Docker. Greenlight a besoin d'une clé secrète pour fonctionner en production. J'ai lancé la commande ci dessous pour la générée et pouvoir définir sur cette clé le *SECRET_KEY_BASE* dans le fichier .env : 
 
         docker run --rm bigbluebutton/greenlight:v2 bundle exec rake secret
 
@@ -449,6 +449,13 @@ Cette solution est composée :
 ### Conception graphique 
 
 #### *Benchmark*
+Avant de me lancer, j'ai effectué une recherche d'inspiration en visitant des sites de portfolio. L'ojectif est d'identifier les tendances du web. J'ai mis en place quelques criètres d'évaluation notamment, l'ergnomie, la typographie, les couleurs. J'ai matérialisé cela par la production d'un *benchmark* dont je présente içi l'extrait : 
+
+![Procédure d'installation de l'OS](https://i.ibb.co/dWGG4NX/Diapositive1.jpg)
+![Procédure d'installation de l'OS](https://i.ibb.co/DkyHctT/Diapositive2.jpg)
+![Procédure d'installation de l'OS](https://i.ibb.co/WHd53Ct/Diapositive3.jpg)
+![Procédure d'installation de l'OS](https://i.ibb.co/QYwQsTY/Diapositive4.jpg)
+
 
 #### Charte graphique
 
@@ -619,6 +626,108 @@ Cette base de données se compose de 2 tables. Les tables « utilisateurs » et 
 
 
 ## Réalisations
+
+**Back-end**
+
+* Création des tables de la base de données
+
+    Après avoir établi le modèle conceptuel et logique de la base des données, j'ai implementé le modèle physique dans Phpmyadmin en exportant le diagramme que j'ai réalisé dans MySQL Workbench. Cette opération consiste à traduire le modèle conceptuel et logique en un langage de définition de données, en l'occurence celui du SQL. J'ai par la suite copié le code dans l'onglet SQL de Phpmyadmin. J'ai éxécuté le code et Phpmyadmin génére automatiquement mes tables en lisant le code SQL importé.
+
+* Connexion à la base de données
+
+    * Comme mentionné dans la partie spécification techniques, je me connecte à ma base en locale dans PHPMYADMIN par le protocole PDO de MySQL. J'ai opté pour ce mode de connexion pour faciliter la migration de la base sur un autre gestionnaire tel que Oracle si le besoin se présente, contrairement au protocole *mysqli* qui est propre à MySQL. J'ai donc créé une page "db-connect.php" dans laquelle j'établie ma connexion comme suit :
+
+            <?php
+            $servername = "localhost";
+            $dbname = "backoffice";
+            $username = "root";
+            $password = "";
+            try {
+                $db = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                // set the PDO error mode to exception
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                //echo "Connected successfully";
+            } catch(PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+
+        La première partie de ce code consiste à définir les variables de connexions notamment le nom du serveur, le nom de la base, le nom de l'utilisateur, et un mot de passe. Je crée ensuite une variable $db dans laquelle j'établie une nouvelle connexion avec PDO en identifiant le nom du SGBD, notamment MysQL et les variables de connexions. La dernière partie sert à paramétrer PDO pour qu'il gère les exceptions en cas d'erreurs.
+
+* Création d'un formulaire de connexion au back-office  
+
+    * L'application intègre une page de connexion avec authentification par nom d'utilisateur et mot de passe. J'ai commencé par créer dans ma page index.php un formulaire utilisant la méthode *Post* et qui renvoi les données pour traitement à la page *connexion.php*. Pour la saisie des données, j'ai des *input* de type *text* et *password*. Deux boutons "Se connecter" et "S'inscrire" servent à soumettre les informations renseignés pour traitement dans la page connexion.php ou à rediriger les utilisateurs vers la page *register.php*. J'active une *session_start()* pour passer cette variable  dans connexion.php;
+
+            <form method="post" action="connexion.php">
+            <div class="mb-3">
+                <label for="inputName" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="inputName" name="username">
+            </div>
+            <div class="mb-3">
+                <label for="inputPassword" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="inputPassword" name="password">
+            </div>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+                <a href="register.php" class="btn btn-outline-primary">S'inscrire</a>
+            </form>
+    
+   
+    * Dans la page connexion.php, j'effectue le traitement des données récupérées dans la variable *$_POST*  et *$_SESSION*. 
+
+            <?php
+
+            require_once('db-connect.php');
+
+            $sql = 'SELECT id, username, password FROM users WHERE username = :username';
+            $query = $db->prepare($sql);
+            $query->execute(array('username'=> $_POST['username']));
+            $result = $query->fetch();
+
+            if ($_POST) {
+                if (isset($_POST['username']) && empty($_POST['username'])
+            ){
+                $_SESSION['error'] = "Veuillez renseigner tous les champ ou cliquer sur le bouton s'incrire'.";
+            }
+            else {
+                if (!$result){
+                    $_SESSION['error'] = "L'identifiant ou le mot de passe sont incorrects." ;
+                } else{
+                    $checkingPassword = password_verify($_POST['password'], $result['password']);
+                    //var_dump($checkingPassword);
+                    if (!$checkingPassword) {
+                        $_SESSION['error'] = "L'identifiant ou le mot de passe sont incorrects.";
+                        header('Location: index.php');
+                    }
+                    else {
+                        session_start();
+                        $_SESSION['id'] = $result['id'];
+                        $_SESSION['username'] = $result['username'];
+                        $_SESSION['success'] = "Vous êtes connecté!";
+                        header('Location: home.php');
+                        }
+                    }
+                    }
+                }
+            ?>
+    
+    Avant tout, je me connecte à la base par un *require_once* de ma page *"db_connect.php"*, puis je crée ma requête SQL que j'enveloppe dans une variable. Je prépare ma requête avec *prepare()* avant de l'executé. Cela évite le traitement des scipts injectés par des utilisateurs malveillants. Je traite ensuite la vérification du nom d'utilisateur à un premier niveau puis une seconde vérification, celle du mot  de passe si le nom d'utilisateur est renseigné. 
+
+    Si l'authentification réussie, l'utilisateur est redirigé vers la page *home.php", page d'accueil du back-office.
+
+    Inversement, un message d'erreur est affiché sur si l'authentification a échouée avec une proposition d'inscription. 
+
+            <?php
+              if(!empty($_SESSION['error'])){
+                echo '  <div class="alert alert-danger" role="alert">
+                ' . $_SESSION['error'] . '
+                    </div>
+                  ';
+                  $_SESSION['error'] = '';
+              }
+            ?>
+
+    
+**Création d'un formulaire d'ajout de contenu**
+
 
 ## Présentation du jeu d’essai 
 
