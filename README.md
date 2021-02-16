@@ -635,52 +635,98 @@ Cette base de données se compose de 2 tables. Les tables « utilisateurs » et 
 
 * Connexion à la base de données
 
-    * Comme mentionné dans la partie spécification techniques, je me connecte à ma base en locale dans PHPMYADMIN par le protocole PDO de MySQL. J'ai opté pour ce mode de connexion pour faciliter la migration de la base sur un autre gestionnaire tel que Oracle si le besoin se présente, contrairement au protocole *mysqli* qui est propre à MySQL. J'ai donc créé une page "db-connect.php" dans laquelle j'établie ma connexion comme suit :
+    * J'ai créé une page "db-connect.php" dans laquelle j'établie ma connexion comme suit :
 
-    ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/pydHqCG/dbconnect.jpg)
+        ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/pydHqCG/dbconnect.jpg)
 
-    La première partie de ce code consiste à définir les variables de connexions notamment le nom du serveur, le nom de la base, le nom de l'utilisateur, et un mot de passe. Je crée ensuite une variable $db dans laquelle j'établie une nouvelle connexion avec PDO en identifiant le nom du SGBD, notamment MysQL et les variables de connexions. La dernière partie sert à paramétrer PDO pour qu'il gère les exceptions en cas d'erreurs.
+        La première partie de ce code consiste à définir les variables de connexions notamment le nom du serveur, le nom de la base, le nom de l'utilisateur, et un mot de passe. Je crée ensuite une variable $db dans laquelle j'établie une nouvelle connexion avec PDO en identifiant le nom du SGBD, notamment MysQL et les variables de connexions. La dernière partie sert à paramétrer PDO pour qu'il gère les exceptions en cas d'erreurs.
 
 * Connexion au back-office  
 
     * L'application intègre une page de connexion avec authentification par nom d'utilisateur et mot de passe. J'ai commencé par créer dans ma page index.php un formulaire utilisant la méthode *Post* et qui renvoi les données pour traitement à la page *connexion.php*. Pour la saisie des données, j'ai des *input* de type *text* et *password*. Deux boutons "Se connecter" et "S'inscrire" servent à soumettre les informations renseignés pour traitement dans la page connexion.php ou à rediriger les utilisateurs vers la page *register.php*. J'active une *session_start()* pour passer cette variable  dans connexion.php;
 
-    ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/jJKkhpP/index.jpg)
+        ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/jJKkhpP/index.jpg)
      
     * Dans la page connexion.php, j'effectue le traitement des données récupérées dans la variable *$_POST*  et *$_SESSION*. Avant tout, je me connecte à la base par un *require_once* de ma page *"db_connect.php"*, puis je crée ma requête SQL que j'enveloppe dans une variable. Je prépare ma requête avec *prepare()* avant de l'executé. Cela évite le traitement des scipts injectés par des utilisateurs malveillants. Je traite ensuite la vérification du nom d'utilisateur à un premier niveau puis une seconde vérification, celle du mot  de passe si le nom d'utilisateur est renseigné. 
 
-     ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/q1TH9NB/connexion.jpg)
+        ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/q1TH9NB/connexion.jpg)
 
 
-    Si l'authentification réussie, l'utilisateur est redirigé vers la page *home.php", page d'accueil du back-office.
+        Si l'authentification réussie, l'utilisateur est redirigé vers la page *home.php", page d'accueil du back-office.
 
-    Inversement, un message d'erreur est affiché si l'authentification a échouée avec une proposition d'inscription. 
+        Inversement, un message d'erreur est affiché si l'authentification a échouée avec une proposition d'inscription. 
 
-    ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/ZxHwLTM/errorconnexion.jpg)
+        ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/ZxHwLTM/errorconnexion.jpg)
   
     * La page register.php est un formulaire gère l'inscription des utilisateurs. ELle utilise également la méthode $_POST et une *session_star()* pour le transfert des données. A ce stade, il est important de renforcer la sécurité des données récupérées dans ce formulaire. Pour gérer cela, j'ai donc mis en place en premier lieu un néttoyage des données par la fonction "strip_tags()" d'écarter les scripts injectés. En second recours, je crypte les mots de passe par un *password_hash*. Puis troisièmement, j'utilise des requêtes préparée par la fonction *prepare()*. Ce qui veut dire que les requêtes sont compilées avant l'insertion des paramètres par la fonction *bindValue()* et l'exécution par la fonction *execute()*. Cette organisation permet d'éviter l'interprétation de codes introduits dans les paramètres. La requête SQL utilisée est *"INSERT INTO"* - *"VALUES"* pour écrire dans la base.  Si des anomalies sont présentes dans les données (champs non renseigné, mot de passe non conforme, mail non conforme), un message d'erreur s'affiche. Et inversement si les données saisie sont correcte, l'utilisateur est redirigé vers la page index.php où la connexion peut être effectuée. Un message de succès s'affiche également.
 
-    ![Register.php](https://i.ibb.co/dL6GrK4/registerrealisationsportfolio.jpg)
+        ![Capture du code d'inscription](https://i.ibb.co/dL6GrK4/registerrealisationsportfolio.jpg)
 
     
 * Gestion des contenus dans le back-office
 
-    * Page home.php utilisateur connecté if(isset($_post['username']))
-    
+    * La page home.php est l'accueil du back-office. C'est une table qui récupère les données existantes dans la table *projects* de la base. J'ai utilisé la condition if ($_SESSION['username']) pour permettre à l'utilisateur connecté de voir la liste des projets. Cette liste est obtenue par une requête SQL *SELECT * FROM \`projects`*
+
+        ![Capture d'écran du code de la page d'accueil](https://i.ibb.co/L82P6RB/home.jpg)
+
+        Pour afficher la liste, j'ai utilisé une boucle PHP *foreach* sur le résultat de la requête SQL. Dans les éléments *td* d'une table j'ai écrit le code PHP qui récupère les valeurs renvoyées par la requete.
+        
+        ![Capture d'écrand de la boucle de la page d'accueil](https://i.ibb.co/ydnby8S/foreachhome.jpg)
+        
+        J'ai créé les liens de consultation, modification, visibilité et suppression des projets. Dans les cibles des liens j'ai concatené l'URL et l'identifiant du projet récupéré dynamiquement pour l'envoyer vers chaque page concernée.
+
+        ![Capture d'écran des liens de la page d'accueil](https://i.ibb.co/xL2q00d/homelinks.jpg)
+
     * J'ai créé formulaire *add.php* pour gérer l'ajout de contenu dans mon back-office. Il reprend les champs de la table *projects*  de la base de données. A la différence des formulaires des pages vue précédements, celui çi gère l'ajout de fichier pour la gestion des images. J'ai donc rajouté  *enctype="multipart/form-data"*. Une div avec la classe *form-file* et un "input" de *"type=file"* sont insérer dans *form*. 
     
-    Pour gérer le déplacement des images ajoutées, j'ai définie dans une variable l'emplacement de destination du fichier puis j'ai utilisé la fonction *move_uploaded_file()*.  Le système de gestion de la sécurité par nettoyage des scripts avec strip_tags() et par utilisation d'une requête préparée est repris içi. J'ai utilisé la requête SQL *"INSERT INTO"* et *"VALUES"* pour écrire dans la base.
+        Pour gérer le déplacement des images ajoutées, j'ai définie dans une variable l'emplacement de destination du fichier puis j'ai utilisé la fonction *move_uploaded_file()*.  Le système de gestion de la sécurité par nettoyage des scripts avec strip_tags() et par utilisation d'une requête préparée est repris içi. J'ai utilisé la requête SQL *INSERT INTO* - *VALUES* pour écrire dans la base.
+        
+        ![Capture d'écran du code page ajout](https://i.ibb.co/1fQXVSR/conditionsadd.jpg)
 
-    ![Register.php](https://i.ibb.co/1fQXVSR/conditionsadd.jpg)
 
-    ![Register.php](https://i.ibb.co/vdcHjDK/addimage.jpg)
+        ![Capture d'écran du code page ajout image](https://i.ibb.co/vdcHjDK/addimage.jpg)
 
     * J'ai crée une page *details.php* pour la consultation des projets. Dans cette partie, j'utilise les variables superglobales *$_GET* et *$_SESSION* pour récupérer et traiter l'*ID* contenu dans l'URL afin de séléctionner le projet dans la base. Rappelons que cet état est obtenu par ajout à l'URL de l'*ID* d'un article en cliquant sur l'icone "consulter" dans la page "home.php". La requête utilisée est *"SELECT * FROM"* - *"WHERE"*. Le processus de nettoyage et d'utilisation de requête préparée est de nouveau utilisé.
 
-    ![Register.php](https://i.ibb.co/GWDZRDL/details.jpg)
+        ![Capture d'éran de la page de consultation](https://i.ibb.co/GWDZRDL/details.jpg)
 
 
-    * La pade edit.php a été créée pour que l'utilisateur puisse modifier les informations enregistrées dans les champs de la table *projects*. Le principe içi est d'utiliser un formulaire dans lequel les informations existantes dans la base sont prévisualisables et modifiables. C'est donc un mixte de la page details.php et add.php. La différence se situe au niveau de la requête SQL utilisée qui est *"UPDATE"* - *"SET"* - *"WHERE"*.
+    * La page edit.php permet à l'utilisateur de modifier les informations enregistrées dans les champs de la table *projects*. Le principe içi est d'utiliser un formulaire dans lequel les informations existantes dans la base sont prévisualisables et modifiables. Dans le formulaire on execute des requêtes d'affichage des données existantes en donnant comme *"value"* aux *"input"* les valeurs des champs de la table *"projects"*. Le champ "*ID*" doit être dans un élément *input* de type *hidden*.   Cette page est un mixte de la page details.php et add.php. J'ai utilisé les superglobales *$_POST*, *$_GET*, *$_FILE* et *$_SESSION*. 
+
+        ![Capture d'écran de la page de modification](https://i.ibb.co/BTRzdnM/editformpost.jpg)
+
+    
+        La première étape consiste à sélectionner par un *$_GET* le projet à modifier pour l'afficher. La deuxième consiste à utiliser un *$_POST* pour récupérer les données du formulaire. J'ai envoyé la valeur de l'*ID* avec les autres informations pour que la modification se fasse précisément sur le projet ayant l'*ID* séléctionné. La requête SQL j'ai utilisé est *"UPDATE"* - *"SET"* - *"WHERE"*.
+
+        ![Capture d'écran de la page de modification](https://i.ibb.co/CvzPrS8/editpost.jpg)
+
+        J'ai traité la modification des images dans un formulaire à part pour éviter que l'image existante dans la base soit écrasée par un tableau vide envoyé dans le formulaire lorsque l'utilisateur ne veut pas modifier l'image mais d'autres informations. 
+
+        ![Capture d'écran de la page de modification](https://i.ibb.co/6JwnBw1/editimg.jpg)
+
+        ![Capture d'écran de la page de modification](https://i.ibb.co/WzrCq15/editimgform.jpg)
+
+    
+    * J'ai créé une page delete.php pour pertmettre la suppression des projets. Le principe consiste à sélectionner un projet par son identifian comme avec la superglobale *$_GET*, et une requête SQL *SELECT*  puis d'utiliser une requête *DELETE* - *FROM* - *WHERE* \`id` sans quoi tout sera supprimé.
+
+        ![capture d'écran de la page de suppression](https://i.ibb.co/4shgTpf/delete.jpg)
+
+    * Le principe de la page disconnect.php est de supprimer les variables de la session et la session elle même.
+
+        ![capture d'écran de la page de déconnexion](https://i.ibb.co/hyRnWgd/disconnect.jpg)
+
+**Front - end**
+* Connexion à la base de données : 
+    * La page "db-connect.php reprend le même script que celui du back-office avec les mêmes principe de gestion des exceptions.
+ 
+         ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/pydHqCG/dbconnect.jpg)
+
+        La première partie de ce code consiste à définir les variables de connexions notamment le nom du serveur, le nom de la base, le nom de l'utilisateur, et un mot de passe. Je crée ensuite une variable $db dans laquelle j'établie une nouvelle connexion avec PDO en identifiant le nom du SGBD, notamment MysQL et les variables de connexions. La dernière partie sert à paramétrer PDO pour qu'il gère les exceptions en cas d'erreurs.
+
+* Affichage des données récupérées dans la base
+    * J'ai créé la page index.php du site pour afficher les projets. J'ai utilisé la requête SQL *SELECT*. J'ai ensuite utilisé une boucle PHP *foreach* pour parcourir le tableau renvoyé par ma requête. J'ai utilisé une *card* de Bootstrap pour afficher mes projets.
+
+        ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/R4c5z4x/indexfront.jpg)
 
 
 ## Présentation du jeu d’essai 
