@@ -79,10 +79,15 @@ En finalité nous avons pu livrer un outil fonctionnel répondant à l’attente
 #### Extrait du *benchmark*
 
 ##### Youtube Live
-##### Facebook Live
 ![Interface d'accueil de Youtube Live](https://i.ibb.co/T1dbgSZ/youtube-live.jpg)
 ![Interface d'un Live](https://i.ibb.co/0tfSBCj/youtubelive.jpg)
 ![Interface d'un compte](https://i.ibb.co/CW93pZq/compteyoutube.jpg )
+
+##### Facebook Live
+
+![Interface d'un compte](https://i.ibb.co/TvRBPYn/facebooklive.jpg )
+
+
 - Analyse *SWOT* : 
     - Forces : les services sont connus et identifiés par tout le monde, l'interface est ergonomique ;
     - Faiblesses : surchargé, généraliste, faible transparence sur ce qu'il advient des données recueillies ;
