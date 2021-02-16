@@ -152,6 +152,15 @@ Greenlight  est une application Ruby on Rails qui fournit une interface simple a
 
 Pour la sécurité, nous avons ajouter le support SSL à notre serveur BigBlueButton. De plus, sur certaine version de navigateur comme chrome 47, les utilisateurs de Chrome ne peuvent pas partager leur microphone via WebRTC à moins que BigBlueButton ne soit chargé via HTTPS. Pour ce faire, nous avons attribué un nom d'hôte à notre serveur BigBlueButton en l'occurence "Bien-tournér.fr". Un certificat SSL existait déjà sur ce domaine. Nous avions configuré Nginx pour utiliser SSL et afficher du contenu en HTTPS.
 
+Dans cette même logique de sécurité, nous avons désinstallés l'API démos de Bigbluebutton car avec celui ci n'importe qui pouvait accéder sans authentification à notre serveur. Nous avons installé Greenlight qui prends en charge quatre types d'authentification : 
+
+- En application (Greenlight)
+- Google OAuth2
+- Office365 OAuth2
+- LDAP
+
+Tous ces fournisseurs d'authentification sont configurables et peuvent être activés / désactivés individuellement.
+
 ### Accéssibilité et adaptabilité
 
 L'outil bigbluebutton est adaptable à tout type d'appareil. Il intègre également des palettes de couleurs accéssibles aux mal voyants. 
@@ -179,6 +188,11 @@ Nous avons lancé l'installation une fois le paramétrage términé. La deuxièm
 
 ![Procédure d'installation de l'OS](https://i.ibb.co/3fC9Sts/runinstallovh.png)
 ![Procédure d'installation de l'OS](https://i.ibb.co/DMpP3j2/endinstall-OS.png)
+
+
+**Redirection du nom de domaine vers le serveur**
+
+Le domaine bien-tourné.fr existait déjà et était dirigé sur un serveur mutualisé de l'Agence. Dans l'espace administrateur du serveur mutualisé et dans celui du sereur dédié, j'ai fait la redirection  du domaine vers le serveur dédié pour le faire pointer sur Bigbluebutton.
 
 **Installation de l'application Bigbluebutton**
 
@@ -233,9 +247,11 @@ En finalité, nous avons lancé le script shell bbb-install.sh qui démarre le p
 
         wget -qO- https://ubuntu.bigbluebutton.org/bbb-install.sh | bash -s -- -w -a -v xenial-22 -s bbb.example.com -e info@example.com
 
+
+
 **Erreur 500**
 
-Au moment du premier test de connexion à une salle de réunion sur l'API démo, l'application qui gère la création et l'accès aux salons, nous avons rencontrée une erreur 500. Le problème vennais du l'adresse IP, il ne correspondait pas au nom d'hote. J'ai donc lancé la commande bbb-conf --setip <adresse IP du serveur> pour résoudre le problème.
+Au moment du premier test de connexion à une salle de réunion sur l'API démo, l'application qui gère la création et l'accès aux salons, nous avons rencontrée une erreur 500. Le problème vennais de l'adresse IP, il ne correspondait pas au nom d'hote. J'ai donc lancé la commande bbb-conf --setip <adresse IP du serveur> pour résoudre le problème.
 
 ![Procédure d'installation de l'OS](https://i.ibb.co/72ZGCfg/setipbbb.png)
 
@@ -252,9 +268,19 @@ Grosso modo, la première commande vérifie si docker existe sinon, il faute eng
 
         docker run --rm bigbluebutton/greenlight:v2 bundle exec rake secret
 
+Par défaut, Greenlight est installer dans un sous /b du serveur. Nous avons gardé cette configuration pour éviter les conflits avec d'autres composants du serveur. 
 
 ## Présentation du jeu d’essai 
 
+J'essai de me connecté à mon compte utilisateur pour tester si la connexion se fait. Je renseigne le nom de domaine https://bien-tourner;fr/b.J'arrive bien sur la page d'acceuil de Greenlight. Je clique sur le bouton connexion et j'arrive à la au formulaire de connexion. Je renseigne le mail de mon compte utilisateur et mon mot de passe puis je clique sur connxeion. La connexion est faite, je vois que je suis sur la page de mon compte utilisateur. 
+
+J'essai de créer un salon en cliquant sur le bouton "créer un salon". Une fenêtre modale affiche un formulaire avec une case pour remplir le nom du salon et une liste de paramètres à configurer. Je renseigne le nom TEST et clique sur le paramètre "mettre les utilisateurs en sourdine lors de la connexion". Je clique sur "créer", je suis renvoyé vers la page accueil de mon compte utilisateur. Je vérifie que le salon et lien à envoyer aux personnes invitées ont bien été créés . 
+
+Je test à présent le démarrage d'une session. Je séléctionne un salon puis je clique sur le bouton de "démmarer". Un message me demande de rejoindre l'audio ou de rester en écoute seule. Je choisi de rester en écoute seule. Je clique sur l'icone "casque audio". Un message s'affiche me dit que j'ai rejoint la conférence audio.
+
+J'essai maintenant le partage de vidéo externe. Je récupère un lien d'une vidéo diffusée en direct sur Youtube. Je clique sur le bouton "plus" pour afficher l'option " partager une vidéo externe". Une fenêtre modale s'affiche me demandant d'ajouter l'URL d'une vidéo. Je clique sur "partager une nouvelle vidéo", la vidéo se lance. 
+
+![Procédure d'installation de l'OS](https://i.ibb.co/RQjSSWG/jeud-essai.jpg)
 
 
 ## Veille sur les vulnérabilités de sécurité
@@ -287,20 +313,101 @@ Si la précision de cette technique est de 75% en laboratoire, elle ne permet de
 
 La question qui se pose lorsqu'on est sensibilisé à cette problématique, c'est évidemment : « quelles solutions possibles ? ». Or, les études portent sur l'utilisation d'un système de visio-conférence bien précis et très utilisé et répandu : Zoom. On peut évidemment envisager que la technique puisse facilement s'étendre aux autres systèmes de visio-conférence, toutefois j'ai été attentif à cette période aux critiques apportés à l'encontre de Zoom, notamment parce que d'autres critiques, plus directement liées à des problématiques techniques, ont émergé sur la sécurité de cette application depuis le début de la crise du coronavirus. 
 
-J'ai notamment repéré un article intéressant datant du 03/11/2020 intitulé « Visioconférence : les alternatives à Zoom et Teams » et qui cite dès la première ligne la solution BigBlueButton que nous avons identifié pour répondre aux besoins exprimés et que nous avons proposé comme solution de visio-conférence puis qui a été retenu dans le cadre de notre stage. L'article en question peut être consulté à cette adresse : https://www.voyages-d-affaires.com/visioconference-alternatives-zoom-teams-20201103.html
+J'ai notamment repéré un article intéressant datant du 03/11/2020 intitulé « Visioconférence : les alternatives à Zoom et Teams » et qui cite dès la première ligne la solution BigBlueButton que nous avons identifié pour répondre aux besoins exprimés et que nous avons proposé comme solution de visio-conférence puis qui a été retenu dans le cadre de notre stage. L'article en question peut être consulté à cette adresse: https://www.voyages-d-affaires.com/visioconference-alternatives-zoom-teams-20201103.html
 
 
 
-## Recherche à partir de site anglophone
+## Description d’une situation de travail ayant nécessité une recherche, effectuée à partir de site anglophone
 
+**Situation de travail** 
+
+Lors de l'installation de notre outil Greenlight, je me suis occupé de créer le compte administrateur. En effet, cette opération ne se fait pas automatiquement mais à initier après déploiment de l'application. Les comptes utilisateurs peuvent être créés par l'administrateur une fois qu'il a son compte ou en passant par le protocole SSH. J'ai effectué les deux types de créations. 
+
+**Recherche effectuée**
+
+Pour ce faire, j'ai donc fait une recherche sur le moteur *Google* en tapant les mots clés "create administrator profil on bigbluebutton". Les résultats affichés par google me redirige en majorité vers la documentation officielle de Bigbluebutton. C'est d'ailleur une des raisons pour lesquelles j'ai utilisé *Google* car c'est le plus précis et le plus rapide. 
+
+![Procédure d'installation de l'OS](https://i.ibb.co/3vxGYdD/rechercheanglophone.jpg)
+
+
+J'ai pour habitude de vérifier les liens de chaque site pour voir si ils affichent du contenus en Https. Cela me permet de confirmer la fiabilité des informations livrées dans le site. Je vérifie ensuite si le titre et l'extrait du contenu affichés correspondent à ma recherche ou si il manque des mots clés.
+
+C'est ainsi que j'ai pu déduire que le premier lien me redirige vers la documentation officielle de Bigbluebutton, c'est donc bien le lien qu'il me fallait. 
+
+**Consultation et exploitation des informations**
+
+Je procède toujours par un survol des informations de bout en bout, pour confirmer la pertinence des phrases qui contiennent mes mots clés. Ainsi je peux identifier rapidement si ils existent d'autres termes ou mots qui confirme les informations ou mettent la documentation hors cadre.
+
+Dans le cas présent, la documentation confirme bien ce que j'avais besoins. Je me suis connecté au serveur. Et dans le terminal, j'ai lancé la commande de création de compte administrateur suivante : 
+
+    docker exec greenlight-v2 bundle exec rake user:create["name","email","password","admin"]
+
+De la même manière j'ai exécuté la commande de création de compte utilisateur : 
+
+    docker exec greenlight-v2 bundle exec rake user:create["name","email","password","user"]
+
+Il m'a bien retourné l'email et le mot de passe du compte administrateur que j'ai fourni par la suite à mon mâitre de stage et ceux de mon compte utilisateur.
 
 
 ## Extrait du site anglophone
 
 
+**Creating Accounts**
+
+The following examples assume you have Greenlight installed in the ~/greenlight directory. Before running the commands, change into the ~/greenlight directory.
+
+        cd ~/greenlight
+
+**Creating a User Account**
+
+To create an User account with specified values, in the Greenlight directory, run the following command:
+
+    docker exec greenlight-v2 bundle exec rake user:create["name","email","password","user"]
+
+Once the command has finished it will print the account’s email and password.
+
+**Creating an Administrator Account**
+
+To create an Administrator account with the default values, in the Greenlight directory, run the following command:
+
+        docker exec greenlight-v2 bundle exec rake admin:create
+
+If you would like to configure the name, email, or password of the Administrator account, replace the previous command with this:
+
+    docker exec greenlight-v2 bundle exec rake user:create["name","email","password","admin"]
+
+Once the command has finished it will print the account’s email and password.
 
 
+**Traduction**
 
+**Créer des comptes utilisateurs** 
+
+Pour les exemples suivants, on suppose que greenlight est déjà installé
+dans le repértoire ~/greenlight. Avant de lancer les commandes, accéder au repertoire de greenlight  : 
+
+    cd ~/greenlight
+
+**Créer un compte utilisateur** 
+
+Lancer la commande ci-dessous pour créer un compte utilisateur en spécifiant des valeurs :
+
+    docker exec greenlight-v2 bundle exec rake user:create["name","email","password","user"]
+
+Quand la commande sera prête, elle imprimera  l'email et le mot de passe du compte.
+
+**Créer un compte administrateur**
+
+Lancer la commande ci-dessous dans le repértoire *Greenlight* pour créer un compte administrateur avec les valeurs par défaut :
+
+docker exec greenlight-v2 bundle exec rake admin:create
+
+
+Remplacer la commande précédente par la suivante si vous souhaitez configurer le nom, l'adresse e-mail ou le mot de passe du compte administrateur :
+
+    docker exec greenlight-v2 bundle exec rake user:create["name","email","password","admin"]
+
+Une fois la commande terminée, elle imprimera l'email et le mot de passe du compte.
 
 
 
