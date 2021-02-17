@@ -458,14 +458,20 @@ Avant de me lancer, j'ai effectué une recherche d'inspiration en visitant des s
 
 
 #### Charte graphique
-
-##### Palette chromatique
-
-##### Typographies
-
-##### UI KIT
+![Procédure d'installation de l'OS](https://i.ibb.co/G2kZvvH/chartegraphiqueboho.png)
 
 #### Maquettes
+
+##### Front-end
+
+![Procédure d'installation de l'OS](https://i.ibb.co/sKnTJmN/Web-1920-1.png)
+
+##### Back-end 
+
+![Procédure d'installation de l'OS](https://i.ibb.co/s2xwPpK/maquetteback.png)
+![Procédure d'installation de l'OS](https://i.ibb.co/z2ytzB9/maquetteback1.jpg)
+![Procédure d'installation de l'OS](https://i.ibb.co/7jPgbbw/maquetteback3.png)
+
 
 ### Spécifications fonctionnelles du projet
 
@@ -491,7 +497,7 @@ Un bouton « ajouter un projet » permet d'accéder à la page « add.php ».
 
 Depuis cette page, on peut aussi modifier ou supprimer un projet existant et changer sa visibilité, ou encore se déconnecter du *back-office*.
 
-> La requête pour récupérer les informations affichées sur cette page est la même que celle utilisée sur la page listant les projets de l'interface visiteur du portfolio. 
+La requête pour récupérer les informations affichées sur cette page est la même que celle utilisée sur la page listant les projets de l'interface visiteur du portfolio. 
 
 ##### La page de création d'un projet
 
@@ -742,9 +748,11 @@ Cette base de données se compose de 2 tables. Les tables « utilisateurs » et 
 
 ## Présentation du jeu d’essai 
 
-Je vais soumettre à l'application quelques scénarios opérationnels afin de démontrer que les fonctionnalités attendues sont disponibles sur l'application: 
+Je vais soumettre à l'application quelques scénarios opérationnels. Je fournirais à l'entrée les données attendues et inversement pour voir si j'obtiens le comportement attendu :
 
-1. je me connecte connexion au back-office : par sécurité pour se connecter il faut obtenir le lien du back-office. Il n'existe pas de lien visible sur le front pour y accéder. J'ai donc renseigné mon nom d'utilisateur et mon mot de passe.
+1. je me connecte connexion au back-office :
+
+    * par sécurité, il faut obtenir le lien du back-office pour se connecter. Il n'existe pas de lien visible sur le front pour y accéder. J'ai renseigné un nom d'utilisateur et mot de passe exsitant en base de données.
 
     ![Capture d'écran de la page connexion ](https://i.ibb.co/yq9SDWb/jeuessaiconnexion.jpg)
 
@@ -752,11 +760,32 @@ Je vais soumettre à l'application quelques scénarios opérationnels afin de d�
     Je tombe bien sur la page de liste de mes projets dans le back-office 
 
     ![Capture d'écran de la page home](https://i.ibb.co/jVNTSmZ/pagehome.jpg)
-     
 
-2. j'ajoute un projet : dans la page liste des projets, je clique sur le bouton "ajouter un projet". Je suis dirigé vers la page d'ajout des projets. Je reseigne les valeurs attendus dans les champs. Et j'envoi les données.
+    * un message d'erreur s'affiche lorsque je renseigne un nom d'utilisateur et un mot de passe inexistant :
+
+    ![Capture d'écran de la page home](https://i.ibb.co/3Yzfj1N/connexionfausse1.jpg)
+    ![Capture d'écran de la page home](https://i.ibb.co/SQ2rPvz/erreurconnex.jpg)
+
+    *  une connexion avec des champs laissés vides :
+
+    ![Capture d'écran de la page home](https://i.ibb.co/wgBHWQ8/erreuconnex1.jpg)
+
+    * je teste une inscription avec un email invalide : 
+
+         ![Capture d'écran de la page home](https://i.ibb.co/4VBhwmq/mailerreur.jpg)
+
+2. j'ajoute un projet : 
+    
+    * dans le scénario ci dessous, j'ai omis de renseigner la valeur du champ obligatoire "Technologies",  un message d'erreur s'affiche:
+
+     ![Capture d'écran de la page home](https://i.ibb.co/8ctKppr/ajouerreur.jpg)
+    ![Capture d'écran de la page home](https://i.ibb.co/5BP8Tvr/ajouerreur2.jpg)
+
+    * dans la page liste des projets, je clique sur le bouton "ajouter un projet". Je suis dirigé vers la page d'ajout des projets. Je reseigne les valeurs attendus dans les champs. Et j'envoi les données.
 
     ![Capture d'écran de la page home](https://i.ibb.co/djBCtZY/ajoutjeudessai.jpg)
+
+  
 
 3. Je vérifie que le projet est bien enregistrée en base de données : je me connecte à phpmyadmin et consulte dans ma table `projects` la liste des projets enregistrées en base. 
 
@@ -774,7 +803,7 @@ Je vais soumettre à l'application quelques scénarios opérationnels afin de d�
 
     ![Capture d'écran de la page home](https://i.ibb.co/RbjR0Wb/modificationjeudessai.jpg)
     ![Capture d'écran de la page home](https://i.ibb.co/CwVyNjy/modifjeudessai.jpg)
-    ![Capture d'écran de la page home](https://i.ibb.co/c3jFJwD/modificatinfront.jpg)
+
 
 7. Je supprime un projet : la suppression se fait par clique sur l'icone "supprimer" de la page. Je vais supprimé le projet intitulé test. Je montre à la première et deuxième image que le projet existe dans la page home.php et en base de données. Puis les images trois et quatre montrent qu'après l'avoir supprimé, le projet n'existe plus dans les deux tables. 
 
