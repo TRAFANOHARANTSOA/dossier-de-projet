@@ -716,7 +716,9 @@ Cette base de données se compose de 2 tables. Les tables « utilisateurs » et 
         ![capture d'écran de la page de déconnexion](https://i.ibb.co/hyRnWgd/disconnect.jpg)
 
 **Front - end**
+
 * Connexion à la base de données : 
+
     * La page "db-connect.php reprend le même script que celui du back-office avec les mêmes principe de gestion des exceptions.
  
          ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/pydHqCG/dbconnect.jpg)
@@ -726,7 +728,16 @@ Cette base de données se compose de 2 tables. Les tables « utilisateurs » et 
 * Affichage des données récupérées dans la base
     * J'ai créé la page index.php du site pour afficher les projets. J'ai utilisé la requête SQL *SELECT*. J'ai ensuite utilisé une boucle PHP *foreach* pour parcourir le tableau renvoyé par ma requête. J'ai utilisé une *card* de Bootstrap pour afficher mes projets.
 
-        ![Capture d'écran de la modélisation de la base de données dans MySQL Workbench](https://i.ibb.co/R4c5z4x/indexfront.jpg)
+        ![Capture d'écran de la page du site](https://i.ibb.co/R4c5z4x/indexfront.jpg)
+
+    J'ai créé un formulaire de contact qui renvoie les informations à contact.php par la méthode *POST*. La fonction *array_key_exists()* vérifie si la clé *errors* existe et affiche le message d'erreur dans contenu dans $_SESSION['errors'].
+
+    * La page contact.php traite les informations renvoyée par la méthode *POST*. J'ai définie une variable *$errors qui est un tableau vide que j'ai remplie de message d'erreur lorsque les champs ne sont pas renseignés. Lorsque l'erreur existe, je stock les données dans $_SESSION['inputs] et $_SESSION['errors] et les transvases vers footer pour arrêter le processus avec *unset()*.  Dans le cas contraite, si il n'y a pas d'erreur, le mail est envoyé avec succès.
+
+    ![Capture d'écran de la page du site](https://i.ibb.co/1QZ1xmk/contact.jpg)
+
+
+
 
 
 ## Présentation du jeu d’essai 
