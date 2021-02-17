@@ -742,3 +742,106 @@ Cette base de données se compose de 2 tables. Les tables « utilisateurs » et 
 
 ## Présentation du jeu d’essai 
 
+Je vais soumettre à l'application quelques scénarios opérationnels afin de démontrer que les fonctionnalités attendues sont disponibles sur l'application: 
+
+1. je me connecte connexion au back-office : par sécurité pour se connecter il faut obtenir le lien du back-office. Il n'existe pas de lien visible sur le front pour y accéder. J'ai donc renseigné mon nom d'utilisateur et mon mot de passe.
+
+    ![Capture d'écran de la page connexion ](https://i.ibb.co/yq9SDWb/jeuessaiconnexion.jpg)
+
+
+    Je tombe bien sur la page de liste de mes projets dans le back-office 
+
+    ![Capture d'écran de la page home](https://i.ibb.co/jVNTSmZ/pagehome.jpg)
+     
+
+2. j'ajoute un projet : dans la page liste des projets, je clique sur le bouton "ajouter un projet". Je suis dirigé vers la page d'ajout des projets. Je reseigne les valeurs attendus dans les champs. Et j'envoi les données.
+
+    ![Capture d'écran de la page home](https://i.ibb.co/djBCtZY/ajoutjeudessai.jpg)
+
+3. Je vérifie que le projet est bien enregistrée en base de données : je me connecte à phpmyadmin et consulte dans ma table `projects` la liste des projets enregistrées en base. 
+
+    ![Capture d'écran de la page home](https://i.ibb.co/KjwyZJq/ajoutenbasejeudessai.jpg)
+
+4. je vérifie que le projet s'affiche parmis la liste des projets dans le back-office : j'accède à la page home.php consulte la liste.
+
+    ![Capture d'écran de la page home](https://i.ibb.co/DLfqLS8/ajoutlisteprojetjeudessai.jpg)
+
+5. je vérifie que le projet s'affiche dans la liste des projets dans le front-office : je visite la page index.php du site et consulte la liste des projets
+
+    ![Capture d'écran de la page home](https://i.ibb.co/DRGmLqf/projetenfront.jpg)
+
+6. je modifie un projet : je peux faire cette opération en allant sur la page home.php et cliqué sur l'icone "modifier" dans la colonne des "actions" soit en cliquant sur l'icone "consulter" puis dans cette page " je clique sur l'icone "modifier". Une fois arrivé sur le formulaire de modification, je renseigne les champs que je veux modifier. Dans le cas présent, je modifie les technologies, j'ajoute PHP à ma liste et j'envoi. 
+
+    ![Capture d'écran de la page home](https://i.ibb.co/RbjR0Wb/modificationjeudessai.jpg)
+    ![Capture d'écran de la page home](https://i.ibb.co/CwVyNjy/modifjeudessai.jpg)
+    ![Capture d'écran de la page home](https://i.ibb.co/c3jFJwD/modificatinfront.jpg)
+
+7. Je supprime un projet : la suppression se fait par clique sur l'icone "supprimer" de la page. Je vais supprimé le projet intitulé test. Je montre à la première et deuxième image que le projet existe dans la page home.php et en base de données. Puis les images trois et quatre montrent qu'après l'avoir supprimé, le projet n'existe plus dans les deux tables. 
+
+    ![Capture d'écran de la page home](https://i.ibb.co/n1rrTwf/supprjeudessai.jpg)
+    ![Capture d'écran de la page home](https://i.ibb.co/9YtPcgy/supprbase.jpg)
+    ![Capture d'écran de la page home](https://i.ibb.co/cxX7Qm6/supprjeudessai1.jpg)
+    ![Capture d'écran de la page home](https://i.ibb.co/60ShSs2/supprbase2.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
