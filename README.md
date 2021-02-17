@@ -391,7 +391,7 @@ Once the command has finished it will print the account’s email and password.
 Pour les exemples suivants, on suppose que greenlight est déjà installé
 dans le repértoire ~/greenlight. Avant de lancer les commandes, accéder au repertoire de greenlight  : 
 
-    cd ~/greenlight
+`cd ~/greenlight`
 
 **Créer un compte utilisateur** 
 
